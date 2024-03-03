@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pets_app/Features/signing_view/presentation/signing_view.dart';
+import 'package:pets_app/Features/AuthFeature/presentation/views/signing_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,12 +8,11 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true),
+      theme: ThemeData(),
       home: const SigningView(),
     );
   }

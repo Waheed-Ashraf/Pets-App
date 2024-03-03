@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pets_app/Features/signing_view/presentation/widgets/custom_button.dart';
-import 'package:pets_app/core/app_styles.dart';
+import 'package:pets_app/Core/utils/app_styles.dart';
+import 'package:pets_app/Core/utils/assets_data.dart';
+import 'package:pets_app/Core/widgets/custom_button.dart';
 
 class SigningViewBody extends StatelessWidget {
   const SigningViewBody({super.key});
@@ -11,8 +12,12 @@ class SigningViewBody extends StatelessWidget {
       child: Column(
         children: [
           const Spacer(flex: 4),
-          Image.asset(
-            'assets/images/cats.png',
+          SizedBox(
+            height: 150,
+            child: Image.asset(
+              AssetsData.launchingScreenImg,
+              fit: BoxFit.contain,
+            ),
           ),
           Text(
             'Loly Pets',

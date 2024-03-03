@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pets_app/core/app_styles.dart';
+import 'package:pets_app/Core/utils/app_styles.dart';
 import 'package:pets_app/core/utils/colors.dart';
 
 class CustomButton extends StatelessWidget {
