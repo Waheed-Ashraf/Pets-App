@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:pets_app/Core/utils/app_styles.dart';
 import 'package:pets_app/Core/utils/assets_data.dart';
 import 'package:pets_app/Core/widgets/custom_button.dart';
-import 'package:pets_app/Features/AuthFeature/presentation/views/login_view/widgets/create_account_widget.dart';
-import 'package:pets_app/Features/AuthFeature/presentation/views/login_view/widgets/login_form.dart';
-import 'package:pets_app/Features/AuthFeature/presentation/views/register_view/register_view.dart';
+import 'package:pets_app/Features/AuthFeature/presentation/views/register_view/widgets/already_have_account_widget.dart';
+import 'package:pets_app/Features/AuthFeature/presentation/views/register_view/widgets/register_form.dart';
 
-class LoginViewBody extends StatelessWidget {
-  const LoginViewBody({super.key});
+class RegisterViewBody extends StatelessWidget {
+  const RegisterViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,18 +34,11 @@ class LoginViewBody extends StatelessWidget {
             ),
           ),
           const Spacer(flex: 3),
-          const LoginForm(),
-          const Spacer(flex: 3),
-          CustomButton(
-              text: 'Login',
-              onPressed: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) {
-                  return const RegisterView();
-                }));
-              }),
+          const RegisterForm(),
+          const Spacer(flex: 2),
+          CustomButton(text: 'Register', onPressed: () {}),
           const Spacer(),
-          const CreateAccountWidget(),
+          const AlreadyHaveAccounrWidget(),
           const Spacer(flex: 2),
         ],
       ),

@@ -3,6 +3,7 @@ import 'package:pets_app/Core/utils/app_styles.dart';
 import 'package:pets_app/Core/utils/assets_data.dart';
 import 'package:pets_app/Core/widgets/custom_button.dart';
 import 'package:pets_app/Features/AuthFeature/presentation/views/login_view/login_view.dart';
+import 'package:pets_app/Features/AuthFeature/presentation/views/register_view/register_view.dart';
 
 class SigningViewBody extends StatelessWidget {
   const SigningViewBody({super.key});
@@ -41,7 +42,12 @@ class SigningViewBody extends StatelessWidget {
             ),
             CustomButton(
               text: 'Register',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) {
+                  return const RegisterView();
+                }));
+              },
               withBorder: true,
               color: Colors.white,
             ),

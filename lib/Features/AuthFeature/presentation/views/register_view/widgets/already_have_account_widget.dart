@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pets_app/Core/utils/app_styles.dart';
-import 'package:pets_app/Features/AuthFeature/presentation/views/register_view/register_view.dart';
+import 'package:pets_app/Features/AuthFeature/presentation/views/login_view/login_view.dart';
 import 'package:pets_app/core/utils/colors.dart';
 
-class CreateAccountWidget extends StatelessWidget {
-  const CreateAccountWidget({super.key});
+class AlreadyHaveAccounrWidget extends StatelessWidget {
+  const AlreadyHaveAccounrWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Don\'t have an account?', style: AppStyles.styleMedium18),
+        Text('Already have an account?', style: AppStyles.styleMedium18),
         const SizedBox(
           width: 8,
         ),
@@ -19,10 +19,10 @@ class CreateAccountWidget extends StatelessWidget {
           onTap: () {
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) {
-              return const RegisterView();
+              return const LoginView();
             }));
           },
-          child: Text('Register',
+          child: Text('Login',
               style: AppStyles.styleSemiBold20.copyWith(color: primaryColor)),
         ),
       ],
