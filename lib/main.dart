@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pets_app/Features/AuthFeature/presentation/views/signing_view.dart';
+import 'package:pets_app/Features/AuthFeature/presentation/views/signing_view/signing_view.dart';
 
 void main() {
   runApp(const MyApp());

@@ -43,7 +43,6 @@ abstract class AppStyles {
     fontSize: 20,
     fontWeight: FontWeight.w400,
     fontFamily: 'merriweather',
-    color: Color(0xffffffff),
   );
 
   static TextStyle styleRegular30 = const TextStyle(

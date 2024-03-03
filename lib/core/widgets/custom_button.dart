@@ -7,23 +7,25 @@ class CustomButton extends StatelessWidget {
       {super.key,
       required this.text,
       this.color = primaryColor,
-      this.withBorder = false});
+      this.withBorder = false,
+      required this.onPressed});
 
   final String text;
   final Color? color;
   final bool withBorder;
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
       color: color,
-      minWidth: MediaQuery.sizeOf(context).width * 0.85,
+      minWidth: double.infinity,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
           side: withBorder
               ? const BorderSide(color: primaryColor, width: 3)
               : BorderSide.none),
-      onPressed: () {},
+      onPressed: onPressed,
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
         text,
