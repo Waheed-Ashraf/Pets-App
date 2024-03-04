@@ -17,7 +17,7 @@ class LoginForm extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         const CustomTextField(),
-        const SizedBox(height: 25),
+        const SizedBox(height: 15),
         Text(
           'Password',
           style: AppStyles.styleRegular20,
@@ -26,7 +26,7 @@ class LoginForm extends StatelessWidget {
         const CustomTextField(
           isPassword: true,
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [

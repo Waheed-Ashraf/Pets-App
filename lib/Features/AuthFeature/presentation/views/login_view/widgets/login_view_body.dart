@@ -5,7 +5,7 @@ import 'package:pets_app/Core/utils/assets_data.dart';
 import 'package:pets_app/Core/widgets/custom_button.dart';
 import 'package:pets_app/Features/AuthFeature/presentation/views/login_view/widgets/create_account_widget.dart';
 import 'package:pets_app/Features/AuthFeature/presentation/views/login_view/widgets/login_form.dart';
-import 'package:pets_app/Features/AuthFeature/presentation/views/register_view/register_view.dart';
+import 'package:pets_app/Features/BottomNavBar/bottom_nav_bar.dart';
 
 class LoginViewBody extends StatelessWidget {
   const LoginViewBody({super.key});
@@ -13,42 +13,49 @@ class LoginViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.only(
+          left: 16, right: 16, top: MediaQuery.sizeOf(context).height * 0.15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Spacer(flex: 4),
           Center(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 150,
-                  child: Image.asset(
-                    AssetsData.launchingScreenImg,
-                    fit: BoxFit.contain,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 150,
+                    child: Image.asset(
+                      AssetsData.launchingScreenImg,
+                      fit: BoxFit.contain,
+                    ),
                   ),
-                ),
-                Text(
-                  'Loly Pets',
-                  style: AppStyles.styleSemiBold24,
-                ),
-              ],
+                  Text(
+                    'Loly Pets',
+                    style: AppStyles.styleSemiBold24,
+                  ),
+                ],
+              ),
             ),
           ),
-          const Spacer(flex: 3),
+          SizedBox(
+            height: MediaQuery.sizeOf(context).height * 0.1,
+          ),
           const LoginForm(),
-          const Spacer(flex: 3),
+          SizedBox(
+            height: MediaQuery.sizeOf(context).height * 0.03,
+          ),
           CustomButton(
               text: 'Login',
               onPressed: () {
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) {
-                  return const RegisterView();
+                  return const BottomBarScreen();
                 }));
               }),
-          const Spacer(),
+          SizedBox(
+            height: MediaQuery.sizeOf(context).height * 0.02,
+          ),
           const CreateAccountWidget(),
-          const Spacer(flex: 2),
         ],
       ),
     );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ThemeData lightMood = ThemeData(
   colorScheme: ColorScheme.dark(
-    background: const Color(0xffFFE4B5),
+    background: /* Color(0xffFFE4B5)*/ Colors.white,
     primary: const Color(0xffD9832C),
     secondary: const Color(0xffE3A456),
     tertiary: Colors.white,
