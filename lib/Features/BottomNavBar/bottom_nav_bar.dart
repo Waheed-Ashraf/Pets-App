@@ -45,7 +45,8 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
           highlightColor: Colors.transparent,
         ),
         child: BottomAppBar(
-          height: kBottomNavigationBarHeight * 1.5,
+          padding: EdgeInsets.zero,
+          height: kBottomNavigationBarHeight * 1.2,
           color: Theme.of(context).colorScheme.primary,
           shape: const CircularNotchedRectangle(),
           notchMargin: 0.1,
@@ -55,7 +56,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.transparent,
             elevation: 0,
-            unselectedItemColor: Colors.grey,
+            unselectedItemColor: Colors.grey.shade400,
             selectedItemColor: Colors.white,
             currentIndex: _selectedPageIndex,
             items: const [
