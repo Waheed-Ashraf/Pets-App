@@ -1,8 +1,10 @@
 // ignore_for_file: unused_local_variable, must_be_immutable
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:pets_app/Features/AuthFeature/presentation/views/login_view/login_view.dart';
 import 'package:pets_app/Features/AuthFeature/presentation/views/register_view/widgets/check_box_widget.dart';
 import 'package:pets_app/core/utils/app_styles.dart';
 import 'package:pets_app/core/widgets/custom_button.dart';
@@ -30,7 +32,8 @@ class RegisterForm extends StatefulWidget {
 
 class _RegisterFormState extends State<RegisterForm> {
   bool isLoading = false;
-
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   GlobalKey<FormState> formKey = GlobalKey();
 
   @override
@@ -138,6 +141,10 @@ class _RegisterFormState extends State<RegisterForm> {
                           message: 'Account created successfully',
                           color: Colors.green,
                         );
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const LoginView();
+                        }));
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'email-already-in-use') {
                           showSnackBar(
@@ -176,5 +183,10 @@ class _RegisterFormState extends State<RegisterForm> {
       email: widget.email!,
       password: widget.password!,
     );
+    // Store additional user information (username) in Firestore
+    await _firestore.collection('users').doc(credential.user!.uid).set({
+      'email': widget.email,
+      'username': widget.fullName,
+    });
   }
 }

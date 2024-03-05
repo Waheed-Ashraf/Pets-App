@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -19,6 +20,9 @@ class _LoginFormState extends State<LoginForm> {
   String? email, password;
 
   bool isLoading = false;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  String username = '';
 
   GlobalKey<FormState> formKey = GlobalKey();
 
@@ -138,5 +142,20 @@ class _LoginFormState extends State<LoginForm> {
       email: email!,
       password: password!,
     );
+
+    QuerySnapshot querySnapshot = await _firestore
+        .collection('users')
+        .where('email', isEqualTo: email)
+        .get();
+
+    // Retrieve the username from the document
+    if (querySnapshot.docs.isNotEmpty) {
+      setState(() {
+        username =
+            (querySnapshot.docs[0].data() as Map<String, dynamic>)['username'];
+
+        print(username);
+      });
+    }
   }
 }
