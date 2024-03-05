@@ -2,13 +2,15 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:pets_app/Features/AuthFeature/presentation/views/register_view/widgets/check_box_widget.dart';
 import 'package:pets_app/core/utils/app_styles.dart';
 import 'package:pets_app/core/widgets/custom_button.dart';
 import 'package:pets_app/core/widgets/custom_text_field.dart';
 import 'package:pets_app/core/widgets/snack_bar.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class RegisterForm extends StatelessWidget {
+class RegisterForm extends StatefulWidget {
   RegisterForm({
     super.key,
     this.fullName,
@@ -22,7 +24,15 @@ class RegisterForm extends StatelessWidget {
   String? password;
   String? confirmPassword;
 
+  @override
+  State<RegisterForm> createState() => _RegisterFormState();
+}
+
+class _RegisterFormState extends State<RegisterForm> {
+  bool isLoading = false;
+
   GlobalKey<FormState> formKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -40,7 +50,7 @@ class RegisterForm extends StatelessWidget {
           const SizedBox(height: 8),
           CustomTextField(
             onChanged: (data) {
-              fullName = data;
+              widget.fullName = data;
             },
             validator: (value) {
               if (value!.isEmpty) {
@@ -57,7 +67,7 @@ class RegisterForm extends StatelessWidget {
           const SizedBox(height: 8),
           CustomTextField(
             onChanged: (data) {
-              email = data;
+              widget.email = data;
             },
             validator: (value) {
               if (value!.isEmpty) {
@@ -77,7 +87,7 @@ class RegisterForm extends StatelessWidget {
           CustomTextField(
             isPassword: true,
             onChanged: (data) {
-              password = data;
+              widget.password = data;
             },
             validator: (value) {
               if (value!.isEmpty) {
@@ -95,10 +105,10 @@ class RegisterForm extends StatelessWidget {
           CustomTextField(
             isPassword: true,
             onChanged: (data) {
-              confirmPassword = data;
+              widget.confirmPassword = data;
             },
             validator: (value) {
-              if (value != password) {
+              if (value != widget.password) {
                 return 'Password is\'t matched';
               }
               return null;
@@ -109,35 +119,52 @@ class RegisterForm extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          CustomButton(
-              text: 'Register',
-              onPressed: () async {
-                if (formKey.currentState!.validate()) {
-                  try {
-                    await registerUser();
-                  } on FirebaseAuthException catch (e) {
-                    if (e.code == 'email-already-in-use') {
-                      showSnackBar(
-                        context,
-                        message: 'Email already exists',
-                        color: Colors.red,
-                      );
-                    } else if (e.code == 'weak-password') {
-                      showSnackBar(
-                        context,
-                        message: 'The password is too weak',
-                        color: Colors.red,
-                      );
+          SizedBox(
+            height: 55,
+            child: ModalProgressHUD(
+              inAsyncCall: isLoading,
+              color: Colors.white,
+              progressIndicator: const RefreshProgressIndicator(),
+              child: CustomButton(
+                  text: isLoading == true ? '' : 'Register',
+                  onPressed: () async {
+                    if (formKey.currentState!.validate()) {
+                      isLoading = true;
+                      setState(() {});
+                      try {
+                        await registerUser();
+                        showSnackBar(
+                          context,
+                          message: 'Account created successfully',
+                          color: Colors.green,
+                        );
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'email-already-in-use') {
+                          showSnackBar(
+                            context,
+                            message: 'Email already exists',
+                            color: Colors.red,
+                          );
+                        } else if (e.code == 'weak-password') {
+                          showSnackBar(
+                            context,
+                            message: 'The password is too weak',
+                            color: Colors.red,
+                          );
+                        }
+                      } catch (e) {
+                        showSnackBar(
+                          context,
+                          message: 'There was an error',
+                          color: Colors.red,
+                        );
+                      }
+                      isLoading = false;
+                      setState(() {});
                     }
-                  } catch (e) {
-                    showSnackBar(
-                      context,
-                      message: 'There was an error',
-                      color: Colors.red,
-                    );
-                  }
-                }
-              }),
+                  }),
+            ),
+          ),
         ],
       ),
     );
@@ -146,8 +173,8 @@ class RegisterForm extends StatelessWidget {
   Future<void> registerUser() async {
     final credential =
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email!,
-      password: password!,
+      email: widget.email!,
+      password: widget.password!,
     );
   }
 }

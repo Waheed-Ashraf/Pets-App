@@ -13,7 +13,6 @@ class RegisterViewBody extends StatelessWidget {
       padding: const EdgeInsets.only(left: 16, right: 16, top: 70),
       child: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
               child: Column(
