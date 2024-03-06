@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pets_app/Core/theme/app_theme.dart';
-import 'package:pets_app/Features/AuthFeature/presentation/views/signing_view/signing_view.dart';
 import 'package:pets_app/Features/BottomNavBar/bottom_nav_bar.dart';
 import 'package:pets_app/firebase_options.dart';
 
@@ -21,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: lightMood,
-      home: const SigningView(),
+      home: const BottomBarScreen(),
     );
   }
 }
