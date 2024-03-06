@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:pets_app/Features/AuthFeature/presentation/views/login_view/login_view.dart';
 import 'package:pets_app/Features/AuthFeature/presentation/views/register_view/widgets/check_box_widget.dart';
 import 'package:pets_app/core/utils/app_styles.dart';
+import 'package:pets_app/core/utils/colors.dart';
 import 'package:pets_app/core/widgets/custom_button.dart';
 import 'package:pets_app/core/widgets/custom_text_field.dart';
 import 'package:pets_app/core/widgets/snack_bar.dart';
@@ -126,8 +127,14 @@ class _RegisterFormState extends State<RegisterForm> {
             height: 55,
             child: ModalProgressHUD(
               inAsyncCall: isLoading,
-              color: Colors.white,
-              progressIndicator: const RefreshProgressIndicator(),
+              color: primaryColor,
+              progressIndicator: const SizedBox(
+                width: 25,
+                height: 25,
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              ),
               child: CustomButton(
                   text: isLoading == true ? '' : 'Register',
                   onPressed: () async {

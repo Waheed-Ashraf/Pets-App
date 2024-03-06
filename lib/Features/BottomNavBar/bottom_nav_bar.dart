@@ -56,7 +56,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.transparent,
             elevation: 0,
-            unselectedItemColor: Colors.grey.shade400,
+            unselectedItemColor: Colors.blue[50],
             selectedItemColor: Colors.white,
             currentIndex: _selectedPageIndex,
             items: const [

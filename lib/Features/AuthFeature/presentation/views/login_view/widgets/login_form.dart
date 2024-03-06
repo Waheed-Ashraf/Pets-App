@@ -90,8 +90,14 @@ class _LoginFormState extends State<LoginForm> {
             height: 55,
             child: ModalProgressHUD(
               inAsyncCall: isLoading,
-              color: Colors.white,
-              progressIndicator: const RefreshProgressIndicator(),
+              color: primaryColor,
+              progressIndicator: const SizedBox(
+                width: 25,
+                height: 25,
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              ),
               child: CustomButton(
                   text: isLoading == true ? '' : 'Login',
                   onPressed: () async {
