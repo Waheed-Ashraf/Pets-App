@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:pets_app/Features/Profile/presentation/views/widgets/picking_image.dart';
+import 'package:pets_app/Features/Profile/presentation/views/widgets/picking_image_list_tile.dart';
 import 'package:pets_app/core/utils/colors.dart';
 import 'rounded_curve.dart';
 import 'package:image_picker/image_picker.dart';
