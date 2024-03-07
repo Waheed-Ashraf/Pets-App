@@ -9,7 +9,7 @@ class DogsList extends StatelessWidget {
     int crossAxisCount = (MediaQuery.of(context).size.width / 150).round();
     return MasonryGridView.builder(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: 5,
       gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: crossAxisCount),

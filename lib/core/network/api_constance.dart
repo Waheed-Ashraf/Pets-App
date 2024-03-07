@@ -4,7 +4,5 @@ class ApiConstance {
   static const String apiKey =
       "live_k8gnKoUFciwxgVRlDlKsEyTDpww3fhoDVzTGZ0sOnQtBfMeO5RbNaFf20xCEyP98";
 
-  // static const String nowPlayingMoviesPath =
-
-  //     "$baseUrl/movie/now_playing?api_key=$apiKey";
+  static const String catBreedsList = "$baseUrl/breeds?api_key=$apiKey";
 }
