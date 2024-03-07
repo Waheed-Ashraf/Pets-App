@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:pets_app/Features/Cats/presentation/views/cats_view.dart';
 import 'package:pets_app/Features/Dogs/presentation/views/dogs_view.dart';
 import 'package:pets_app/Features/Favorit/presentation/views/favorit_view.dart';
@@ -49,8 +50,9 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
           height: kBottomNavigationBarHeight * 1.2,
           color: Theme.of(context).colorScheme.primary,
           shape: const CircularNotchedRectangle(),
-          notchMargin: 0.1,
-          clipBehavior: Clip.antiAlias,
+          notchMargin: 0.8,
+
+          //  clipBehavior: Clip.antiAlias,
           child: BottomNavigationBar(
             onTap: _selectPage,
             type: BottomNavigationBarType.fixed,
@@ -94,8 +96,8 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
         child: FloatingActionButton(
           hoverElevation: 0,
           backgroundColor: Colors.transparent,
-          // splashColor: Colors.grey,
-          tooltip: 'Explore',
+          // splashColor: Colors.transparent,
+          // tooltip: 'Explore',
           elevation: 0,
           child: Icon(
             FontAwesomeIcons.paw,
