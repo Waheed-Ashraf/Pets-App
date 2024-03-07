@@ -7,6 +7,12 @@ abstract class AppStyles {
     fontFamily: 'merriweather',
     color: Colors.black,
   );
+  static TextStyle styleRegular18 = const TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'merriweather',
+    color: Colors.black,
+  );
 
   static TextStyle styleSemiBold16 = const TextStyle(
     fontSize: 16,
