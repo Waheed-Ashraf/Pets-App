@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class DogsList extends StatelessWidget {
-  const DogsList({super.key});
+class CatsList extends StatelessWidget {
+  const CatsList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class DogsList extends StatelessWidget {
           crossAxisCount: crossAxisCount),
       itemBuilder: (BuildContext context, int index) {
         return Padding(
-          padding: const EdgeInsets.all(2),
+          padding: const EdgeInsets.all(8.0),
           child: Container(
             color: Colors.red,
             height: 200,

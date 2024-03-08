@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pets_app/Features/Cats/presentation/views/widgets/cats_view_body.dart';
 
 class CatsView extends StatelessWidget {
   const CatsView({super.key});
@@ -6,9 +7,7 @@ class CatsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Text('CatsView'),
-      ),
+      body: CatsViewBody(),
     );
   }
 }
