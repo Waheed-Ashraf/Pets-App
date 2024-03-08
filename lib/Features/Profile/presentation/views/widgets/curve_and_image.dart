@@ -191,7 +191,9 @@ class ProfileImage extends StatelessWidget {
         _galleryImageFile = galleryImageFile;
 
   final bool? cameraImage;
+  // ignore: unused_field
   final File? _cameraImageFile;
+  // ignore: unused_field
   final File? _galleryImageFile;
 
   @override
