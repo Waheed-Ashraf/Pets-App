@@ -15,7 +15,7 @@ class CatsList extends StatelessWidget {
           crossAxisCount: crossAxisCount),
       itemBuilder: (BuildContext context, int index) {
         return Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(1),
           child: Container(
             color: Colors.red,
             height: 200,

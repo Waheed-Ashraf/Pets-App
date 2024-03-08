@@ -105,7 +105,11 @@ class _CurveAndImageState extends State<CurveAndImage> {
           height: MediaQuery.sizeOf(context).height * 0.35,
           curveHeight: 50,
           color: primaryColor,
-          child: const Center(),
+          child: Image.asset(
+            'assets/images/appbar.PNG',
+            width: double.infinity,
+            fit: BoxFit.cover,
+          ),
         ),
         Positioned(
           bottom: -30,
