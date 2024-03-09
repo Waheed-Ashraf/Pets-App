@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:pets_app/Features/Profile/presentation/views/widgets/picking_image_list_tile.dart';
@@ -17,6 +19,9 @@ class CurveAndImage extends StatefulWidget {
 
 String? cameraImageUrl;
 String? galleryImageUrl;
+String? username;
+String? profileImage;
+String? _latestItemUrl;
 
 class _CurveAndImageState extends State<CurveAndImage> {
   File? _galleryImageFile;
@@ -33,7 +38,7 @@ class _CurveAndImageState extends State<CurveAndImage> {
       setState(() {
         _galleryImageFile = File(pickedImage.path);
       });
-      _uploadImageToFirebaseStorage(_galleryImageFile!);
+      await _uploadImageToFirebaseStorage(_galleryImageFile!);
     }
   }
 
@@ -48,7 +53,7 @@ class _CurveAndImageState extends State<CurveAndImage> {
       setState(() {
         _cameraImageFile = File(pickedFile.path);
       });
-      _uploadImageToFirebaseStorage(_cameraImageFile!);
+      await _uploadImageToFirebaseStorage(_cameraImageFile!);
     }
   }
 
@@ -60,15 +65,18 @@ class _CurveAndImageState extends State<CurveAndImage> {
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
 
       // Reference to the image file in Firebase Storage
-      Reference reference = _storage.ref().child('images/$fileName.jpg');
+      Reference reference = _storage.ref().child('$fileName.jpg');
 
       // Upload the image to Firebase Storage
       await reference.putFile(imageFile);
 
       // Get the download URL of the uploaded image
       String imageUrl = await reference.getDownloadURL();
+
+      setState(() {});
       if (cameraImage == true) {
         cameraImageUrl = imageUrl;
+        print('vvvvvvvvvvvvvvvvv$cameraImageUrl');
         setState(() {});
       } else {
         galleryImageUrl = imageUrl;
@@ -93,6 +101,86 @@ class _CurveAndImageState extends State<CurveAndImage> {
         ),
       );
     }
+  }
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  User? _user; // Variable to store the current user
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentUser();
+    _getUserData();
+    _setParameters();
+    cameraImage = true;
+  }
+
+  // Method to get the current user
+  void _getCurrentUser() {
+    User? currentUser = _auth.currentUser;
+    setState(() {
+      _user = currentUser;
+    });
+  }
+
+  void _setParameters() async {
+    _getCurrentUser();
+    // Reference to a document in a "users" collection using the user's ID
+    DocumentReference userDocRef =
+        _firestore.collection('users').doc(_user!.uid);
+
+    // Set parameters to the document
+    await userDocRef.set({
+      'email': _user!.email,
+      'userimage': await _getLatestItem(),
+      'username': username
+    }).then((_) {
+      setState(() {});
+      print('Parameters set successfully!');
+    }).catchError((error) {
+      print('Failed to set parameters: $error');
+    });
+  }
+
+  void _getUserData() async {
+    QuerySnapshot querySnapshot = await _firestore
+        .collection('users')
+        .where('email', isEqualTo: _user!.email)
+        .get();
+
+    // Retrieve the username from the document
+    if (querySnapshot.docs.isNotEmpty) {
+      setState(() {
+        username =
+            (querySnapshot.docs[0].data() as Map<String, dynamic>)['username'];
+        profileImage =
+            (querySnapshot.docs[0].data() as Map<String, dynamic>)['userimage'];
+        print('wwwwwwwwwwwwwwwwwww$profileImage');
+      });
+    }
+  }
+
+  Future<String?> _getLatestItem() async {
+    try {
+      // List all items in the storage bucket
+      ListResult result = await _storage.ref().listAll();
+
+      // Sort the items by name (assuming names represent the order)
+      result.items.sort((a, b) => b.name.compareTo(a.name));
+
+      // Get the URL of the last item (latest item)
+      if (result.items.isNotEmpty) {
+        _latestItemUrl = await result.items.last.getDownloadURL();
+        print('wweeeeeeeeeeeeeeeeeeeeeeeeeee$_latestItemUrl');
+        return _latestItemUrl!;
+      } else {
+        return _latestItemUrl = 'Sorry!!!!';
+      }
+    } catch (error) {
+      print('Error getting latest item: $error');
+    }
+    return null;
   }
 
   @override
@@ -160,6 +248,8 @@ class _CurveAndImageState extends State<CurveAndImage> {
                   onTap: () async {
                     cameraImage = true;
                     await _pickImageFromCamera();
+                    _setParameters();
+                    setState(() {});
                   },
                   child: const BottomSheetListTile(
                     icon: Icons.camera_alt_rounded,
@@ -167,9 +257,11 @@ class _CurveAndImageState extends State<CurveAndImage> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     cameraImage = false;
-                    _pickImageFromGallery();
+                    await _pickImageFromGallery();
+                    _setParameters();
+                    setState(() {});
                   },
                   child: const BottomSheetListTile(
                     icon: Icons.image,
@@ -215,13 +307,13 @@ class ProfileImage extends StatelessWidget {
               : CircleAvatar(
                   radius: 75,
                   backgroundColor: secondaryColor,
-                  backgroundImage: NetworkImage(cameraImageUrl!),
+                  backgroundImage: NetworkImage(_latestItemUrl!),
                 )
           : galleryImageUrl != null
               ? CircleAvatar(
                   radius: 75,
                   backgroundColor: secondaryColor,
-                  backgroundImage: NetworkImage(galleryImageUrl!),
+                  backgroundImage: NetworkImage(_latestItemUrl!),
                 )
               : const CircleAvatar(
                   radius: 75,
