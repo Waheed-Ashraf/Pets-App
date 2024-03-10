@@ -21,8 +21,6 @@ class _LoginFormState extends State<LoginForm> {
 
   bool isLoading = false;
 
-  String username = '';
-
   GlobalKey<FormState> formKey = GlobalKey();
 
   @override

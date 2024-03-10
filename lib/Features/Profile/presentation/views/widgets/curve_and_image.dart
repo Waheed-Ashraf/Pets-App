@@ -112,7 +112,6 @@ class _CurveAndImageState extends State<CurveAndImage> {
     super.initState();
     _getCurrentUser();
     _getUserData();
-    _setParameters();
     cameraImage = true;
   }
 
@@ -122,6 +121,7 @@ class _CurveAndImageState extends State<CurveAndImage> {
     setState(() {
       _user = currentUser;
     });
+    print('Cccccccccccccurent user done');
   }
 
   void _setParameters() async {
@@ -158,6 +158,7 @@ class _CurveAndImageState extends State<CurveAndImage> {
             (querySnapshot.docs[0].data() as Map<String, dynamic>)['userimage'];
         print('wwwwwwwwwwwwwwwwwww$profileImage');
       });
+      print('uuuuuuuuuuuuuuuuuuser:$username');
     }
   }
 
@@ -180,6 +181,7 @@ class _CurveAndImageState extends State<CurveAndImage> {
     } catch (error) {
       print('Error getting latest item: $error');
     }
+
     return null;
   }
 
