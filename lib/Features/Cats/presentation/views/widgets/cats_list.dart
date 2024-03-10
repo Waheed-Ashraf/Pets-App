@@ -17,6 +17,7 @@ class CatsList extends StatelessWidget {
       builder: (context, state) {
         if (state is CatsBreedsLoaded) {
           return FadeInUp(
+            duration: const Duration(milliseconds: 400),
             child: MasonryGridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -54,7 +55,7 @@ class CatsList extends StatelessWidget {
           return CustomErrorWidget(errMessage: state.errorMessage);
         } else {
           return CustomLoadingIndicator(
-            hight: MediaQuery.of(context).size.height - 90,
+            hight: MediaQuery.of(context).size.height - 100,
             loadingImg: 'assets/images/loading.json',
           );
         }
