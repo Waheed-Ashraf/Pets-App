@@ -31,6 +31,7 @@ dependencies:
   cached_network_image: ^3.3.1
   cloud_firestore: ^4.14.0
   cupertino_icons: ^1.0.6
+  dartz: ^0.10.1
   device_preview: ^1.1.0
   dio: ^5.4.1
   equatable: ^2.0.5

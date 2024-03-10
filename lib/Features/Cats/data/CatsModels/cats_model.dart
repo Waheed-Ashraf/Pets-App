@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:pets_app/Features/Cats/data/CatsModels/cats_image_model.dart';
 import 'package:pets_app/Features/Cats/data/CatsModels/cats_wights_model.dart';
 
-class Cat extends Equatable {
+class CatModel extends Equatable {
   final Weight weight;
   final String id;
   final String name;
@@ -39,7 +39,7 @@ class Cat extends Equatable {
   final String referenceImageId;
   final Image image;
 
-  const Cat({
+  const CatModel({
     required this.weight,
     required this.id,
     required this.name,
@@ -77,8 +77,8 @@ class Cat extends Equatable {
     required this.image,
   });
 
-  factory Cat.fromJson(Map<String, dynamic> json) {
-    return Cat(
+  factory CatModel.fromJson(Map<String, dynamic> json) {
+    return CatModel(
       weight: Weight.fromJson(json['weight']),
       id: json['id'],
       name: json['name'],
@@ -117,7 +117,6 @@ class Cat extends Equatable {
     );
   }
 
-  @override
   @override
   List<Object?> get props => [
         weight,

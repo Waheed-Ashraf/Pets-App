@@ -1,4 +1,5 @@
 //import 'package:dio/dio.dart';
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 GetIt getIt = GetIt.instance;
@@ -20,4 +21,23 @@ void serviceLocator() {
 
   //webServices
   // getIt.registerLazySingleton<ApiService>(() => ApiService(Dio()));
+}
+
+Dio createAndSetupDio() {
+  Dio dio = Dio();
+
+  dio
+    ..options.connectTimeout = (200 * 1000) as Duration?
+    ..options.receiveTimeout = (200 * 1000) as Duration?;
+
+  dio.interceptors.add(LogInterceptor(
+    responseBody: true,
+    error: true,
+    requestHeader: false,
+    responseHeader: false,
+    request: true,
+    requestBody: true,
+  ));
+
+  return dio;
 }
