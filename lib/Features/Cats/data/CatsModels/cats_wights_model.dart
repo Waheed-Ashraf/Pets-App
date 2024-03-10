@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 
 class Weight extends Equatable {
-  final String imperial;
-  final String metric;
+  final String? imperial;
+  final String? metric;
 
   const Weight({
-    required this.imperial,
-    required this.metric,
+    this.imperial,
+    this.metric,
   });
 
   factory Weight.fromJson(Map<String, dynamic> json) {

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:pets_app/Core/utils/app_styles.dart';
+import 'package:pets_app/Core/widgets/custom_loading_indicator.dart';
 import 'package:pets_app/Features/BottomNavBar/bottom_nav_bar.dart';
 import 'package:pets_app/core/utils/colors.dart';
 import 'package:pets_app/core/widgets/custom_button.dart';
@@ -90,12 +91,10 @@ class _LoginFormState extends State<LoginForm> {
               inAsyncCall: isLoading,
               color: primaryColor,
               progressIndicator: const SizedBox(
-                width: 25,
-                height: 25,
-                child: CircularProgressIndicator(
-                  color: Colors.white,
-                ),
-              ),
+                  width: 25,
+                  height: 25,
+                  child: CustomLoadingIndicator(
+                      hight: 25, loadingImg: 'assets/images/loading.json')),
               child: CustomButton(
                 text: isLoading == true ? '' : 'Login',
                 onPressed: () async {
