@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:pets_app/Features/AuthFeature/presentation/views/login_view/login_view.dart';
 import 'package:pets_app/core/utils/app_styles.dart';
 import 'curve_and_image.dart';
 import 'custom_list_tile.dart';
@@ -25,6 +27,17 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
     setState(() {
       _user = currentUser;
     });
+  }
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<void> _signOut() async {
+    try {
+      await _auth.signOut();
+      // Navigate to login or any other screen after sign-out
+    } catch (e) {
+      print('Error signing out: $e');
+    }
   }
 
   void _getUserData() async {
@@ -68,28 +81,39 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                   style: AppStyles.styleMedium20,
                 ),
               ),
-              const Card(
+              Card(
                 color: Colors.white,
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     side: BorderSide(
                       color: Colors.grey,
                     )),
                 child: Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      CustomListTile(
+                      const CustomListTile(
                         icon: Icons.settings_outlined,
                         title: 'Settings',
                       ),
-                      CustomListTile(
+                      const CustomListTile(
                         icon: Icons.mode_edit_outline_outlined,
                         title: 'Edit profile information',
                       ),
-                      CustomListTile(
-                        icon: Icons.logout_outlined,
-                        title: 'Logout',
+                      GestureDetector(
+                        onTap: () async {
+                          await _signOut();
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginView(),
+                            ),
+                          );
+                        },
+                        child: const CustomListTile(
+                          icon: Icons.logout_outlined,
+                          title: 'Logout',
+                        ),
                       ),
                     ],
                   ),
