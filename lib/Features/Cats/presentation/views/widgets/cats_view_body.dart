@@ -11,19 +11,10 @@ class CatsViewBody extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       slivers: [
         SliverAppBar(
-          toolbarHeight: 90,
+          toolbarHeight: 70,
           floating: false,
           centerTitle: true,
           pinned: false,
-          flexibleSpace: const ClipRRect(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(50),
-                bottomRight: Radius.circular(50)),
-            child: Image(
-              image: AssetImage('assets/images/appbar.PNG'),
-              fit: BoxFit.cover,
-            ),
-          ),
           backgroundColor: Colors.transparent,
           title: CustomSearchTextField(onTap: () {}),
         ),

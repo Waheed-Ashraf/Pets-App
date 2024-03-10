@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,40 +15,31 @@ class CatsList extends StatelessWidget {
     return BlocBuilder<CatsBreedsCubit, CatsBreedsState>(
       builder: (context, state) {
         if (state is CatsBreedsLoaded) {
-          return FadeInUp(
-            duration: const Duration(milliseconds: 400),
-            child: MasonryGridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: 50,
-              gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: crossAxisCount),
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: (state.catsBreedsList[index].image) == null
-                          ? Container()
-                          : CachedNetworkImage(
-                              imageUrl: state.catsBreedsList[index].image!.url,
-                              fit: BoxFit.cover,
-                              // placeholder: (context, url) => Shimmer.fromColors(
-                              //   baseColor: Colors.grey[850]!,
-                              //   highlightColor: Colors.grey[800]!,
-                              //   child: Container(
-                              //     height: state.catsBreedsList[index].image!.height,
-
-                              //     decoration: BoxDecoration(
-                              //       color: Colors.black,
-                              //       borderRadius: BorderRadius.circular(16.0),
-                              //     ),
-                              //   ),
-                              // ),
-                            )),
-                );
-              },
-            ),
+          return MasonryGridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: state.catsBreedsList.length,
+            gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount),
+            itemBuilder: (BuildContext context, int index) {
+              return (state.catsBreedsList[index].image) == null
+                  ? Container()
+                  : Card(
+                      elevation: 6,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: CachedNetworkImage(
+                          imageUrl: state.catsBreedsList[index].image!.url,
+                          fit: BoxFit.cover,
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
+                      ),
+                    );
+            },
           );
         } else if (state is CatsBreedsFailuer) {
           return CustomErrorWidget(errMessage: state.errorMessage);
