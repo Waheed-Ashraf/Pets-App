@@ -324,14 +324,20 @@ class _ProfileImageState extends State<ProfileImage> {
           Map photoData = snapshot.data!.data() as Map;
           String? photoUrl = photoData['userimage'];
           print('pppppppppppppppppp:$photoUrl');
-          return Container(
-              alignment: Alignment.center,
-              width: MediaQuery.sizeOf(context).width * 0.4,
-              child: CircleAvatar(
-                radius: 75,
-                backgroundColor: secondaryColor,
-                backgroundImage: NetworkImage(photoUrl!),
-              ));
+          return photoUrl != null
+              ? Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.sizeOf(context).width * 0.4,
+                  child: CircleAvatar(
+                    radius: 75,
+                    backgroundColor: secondaryColor,
+                    backgroundImage: NetworkImage(photoUrl),
+                  ))
+              : const CircleAvatar(
+                  radius: 75,
+                  backgroundColor: secondaryColor,
+                  backgroundImage: AssetImage('assets/images/default.png'),
+                );
         });
   }
 }
