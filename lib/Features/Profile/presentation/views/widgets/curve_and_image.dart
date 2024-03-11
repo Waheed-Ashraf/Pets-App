@@ -59,13 +59,19 @@ class _CurveAndImageState extends State<CurveAndImage> {
 
   final FirebaseStorage _storage = FirebaseStorage.instance;
 
+  // Method to get the storage reference for the current user
+  Reference getUserStorageRef() {
+    User? user = _auth.currentUser;
+    return _storage.ref().child('users/${user!.uid}');
+  }
+
   Future<void> _uploadImageToFirebaseStorage(File imageFile) async {
     try {
       // Create a unique filename for the image
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
 
       // Reference to the image file in Firebase Storage
-      Reference reference = _storage.ref().child('$fileName.jpg');
+      Reference reference = getUserStorageRef().child('$fileName.jpg');
 
       // Upload the image to Firebase Storage
       await reference.putFile(imageFile);
@@ -112,6 +118,7 @@ class _CurveAndImageState extends State<CurveAndImage> {
     super.initState();
     _getCurrentUser();
     _getUserData();
+    _getLatestItem();
     cameraImage = true;
   }
 
@@ -165,7 +172,7 @@ class _CurveAndImageState extends State<CurveAndImage> {
   Future<String?> _getLatestItem() async {
     try {
       // List all items in the storage bucket
-      ListResult result = await _storage.ref().listAll();
+      ListResult result = await getUserStorageRef().listAll();
 
       // Sort the items by name (assuming names represent the order)
       result.items.sort((a, b) => b.name.compareTo(a.name));
@@ -173,6 +180,9 @@ class _CurveAndImageState extends State<CurveAndImage> {
       // Get the URL of the last item (latest item)
       if (result.items.isNotEmpty) {
         _latestItemUrl = await result.items.last.getDownloadURL();
+        print('dddddddddddddd$_latestItemUrl');
+        setState(() {});
+        print('dddddddddddddd$_latestItemUrl');
         print('wweeeeeeeeeeeeeeeeeeeeeeeeeee$_latestItemUrl');
         return _latestItemUrl!;
       } else {
