@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:pets_app/Core/errors/Failuer.dart';
 import 'package:pets_app/Core/network/api_constance.dart';
 import 'package:pets_app/Core/utils/api_service.dart';
-import 'package:pets_app/Features/Cats/data/CatsModels/cats_model.dart';
+import 'package:pets_app/Features/Cats/data/Models/CatsModels/cats_model.dart';
 import 'package:pets_app/Features/Cats/data/CatsRepo/cats_repo.dart';
 
 class CatsRepoImp implements CatsRepo {

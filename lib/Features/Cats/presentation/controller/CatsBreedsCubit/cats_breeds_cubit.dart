@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pets_app/Features/Cats/data/CatsModels/cats_model.dart';
+import 'package:pets_app/Features/Cats/data/Models/CatsModels/cats_model.dart';
 import 'package:pets_app/Features/Cats/data/CatsRepo/cats_repo.dart';
 
 part 'cats_breeds_state.dart';

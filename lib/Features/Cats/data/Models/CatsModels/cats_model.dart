@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:pets_app/Features/Cats/data/CatsModels/cats_image_model.dart';
-import 'package:pets_app/Features/Cats/data/CatsModels/cats_wights_model.dart';
+import 'package:pets_app/Features/Cats/data/Models/CatsModels/cats_image_model.dart';
+import 'package:pets_app/Features/Cats/data/Models/CatsModels/cats_wights_model.dart';
 
 class CatModel extends Equatable {
   final Weight? weight;
