@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pets_app/Features/AuthFeature/presentation/views/login_view/login_view.dart';
 import 'package:pets_app/core/utils/app_styles.dart';
+import 'package:pets_app/core/widgets/custom_button.dart';
 import 'curve_and_image.dart';
 import 'custom_list_tile.dart';
 
@@ -100,21 +102,23 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                         icon: Icons.mode_edit_outline_outlined,
                         title: 'Edit profile information',
                       ),
-                      GestureDetector(
-                        onTap: () async {
-                          await _signOut();
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const LoginView(),
-                            ),
-                          );
-                        },
-                        child: const CustomListTile(
-                          icon: Icons.logout_outlined,
-                          title: 'Logout',
-                        ),
+                      const SizedBox(
+                        height: 30,
                       ),
+                      SizedBox(
+                        width: 150,
+                        child: CustomButton(
+                            text: 'Logout',
+                            onPressed: () async {
+                              await _signOut();
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LoginView(),
+                                ),
+                              );
+                            }),
+                      )
                     ],
                   ),
                 ),
