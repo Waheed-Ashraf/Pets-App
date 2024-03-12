@@ -10,16 +10,16 @@ sealed class DogsViewState extends Equatable {
 final class DogsViewInitial extends DogsViewState {}
 
 final class DogsBreedsLoaded extends DogsViewState {
-  final List<DogModel> catsBreedsList;
+  final List<DogModel> dogsBreedsList;
 
-  const DogsBreedsLoaded({required this.catsBreedsList});
+  const DogsBreedsLoaded({required this.dogsBreedsList});
 }
 
-// final class SearchedCatsBreedsLoaded extends DogsViewState {
-//   final List<SearchCatBreedModel> searchCatBreed;
+final class SearchedDogsBreedsLoaded extends DogsViewState {
+  final List<SearchDogsByBreedsIdModel> searchDogBreed;
 
-//   const SearchedCatsBreedsLoaded({required this.searchCatBreed});
-// }
+  const SearchedDogsBreedsLoaded({required this.searchDogBreed});
+}
 
 final class DogsBreedsLoading extends DogsViewState {}
 
