@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomSearchTextField extends StatefulWidget {
-  final void Function() onTap;
+  final void Function(String searchedBreedsId) onTap;
   const CustomSearchTextField({super.key, required this.onTap});
 
   @override
@@ -10,6 +10,7 @@ class CustomSearchTextField extends StatefulWidget {
 }
 
 class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
+  final myController = TextEditingController();
   bool _folded = true;
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
               child: !_folded
                   ? TextField(
                       onSubmitted: (value) {
-                        widget.onTap;
+                        widget.onTap(value);
 
                         setState(() {
                           _folded = !_folded;
@@ -88,7 +89,7 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
                       ),
                     ),
                     onTap: () {
-                      widget.onTap;
+                      widget.onTap(myController.text);
                       setState(() {
                         _folded = !_folded;
                       });

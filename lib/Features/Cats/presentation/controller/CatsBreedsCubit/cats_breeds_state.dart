@@ -15,7 +15,15 @@ final class CatsBreedsLoaded extends CatsBreedsState {
   const CatsBreedsLoaded({required this.catsBreedsList});
 }
 
+final class SearchedCatsBreedsLoaded extends CatsBreedsState {
+  final List<SearchCatBreedModel> searchCatBreed;
+
+  const SearchedCatsBreedsLoaded({required this.searchCatBreed});
+}
+
 final class CatsBreedsLoading extends CatsBreedsState {}
+
+final class CatsBreedsListEmpty extends CatsBreedsState {}
 
 final class CatsBreedsFailuer extends CatsBreedsState {
   final String errorMessage;

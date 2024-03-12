@@ -16,7 +16,7 @@ class DogsViewBody extends StatelessWidget {
           centerTitle: true,
           pinned: false,
           backgroundColor: Colors.transparent,
-          title: CustomSearchTextField(onTap: () {}),
+          //  title: CustomSearchTextField(onTap: () {}),
         ),
         const SliverToBoxAdapter(
           child: DogsList(),
