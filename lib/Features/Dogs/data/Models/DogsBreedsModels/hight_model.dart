@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-class Weight extends Equatable {
+class Height extends Equatable {
   final String imperial;
   final String metric;
 
-  const Weight({
+  const Height({
     required this.imperial,
     required this.metric,
   });
@@ -12,8 +12,8 @@ class Weight extends Equatable {
   @override
   List<Object?> get props => [imperial, metric];
 
-  factory Weight.fromJson(Map<String, dynamic> json) {
-    return Weight(
+  factory Height.fromJson(Map<String, dynamic> json) {
+    return Height(
       imperial: json['imperial'] as String,
       metric: json['metric'] as String,
     );
