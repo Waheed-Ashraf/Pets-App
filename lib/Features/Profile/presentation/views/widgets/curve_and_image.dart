@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pets_app/Features/Profile/presentation/views/widgets/picking_image_list_tile.dart';
 import 'package:pets_app/core/utils/colors.dart';
 import 'rounded_curve.dart';
@@ -22,6 +23,7 @@ String? galleryImageUrl;
 String? username;
 String? profileImage;
 String? _latestItemUrl;
+User? _user;
 
 class _CurveAndImageState extends State<CurveAndImage> {
   File? _galleryImageFile;
@@ -111,7 +113,6 @@ class _CurveAndImageState extends State<CurveAndImage> {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  User? _user; // Variable to store the current user
 
   @override
   void initState() {
@@ -180,10 +181,10 @@ class _CurveAndImageState extends State<CurveAndImage> {
       // Get the URL of the last item (latest item)
       if (result.items.isNotEmpty) {
         _latestItemUrl = await result.items.last.getDownloadURL();
-        print('dddddddddddddd$_latestItemUrl');
+        // print('dddddddddddddd$_latestItemUrl');
         setState(() {});
-        print('dddddddddddddd$_latestItemUrl');
-        print('wweeeeeeeeeeeeeeeeeeeeeeeeeee$_latestItemUrl');
+        // print('dddddddddddddd$_latestItemUrl');
+        // print('wweeeeeeeeeeeeeeeeeeeeeeeeeee$_latestItemUrl');
         return _latestItemUrl!;
       } else {
         return _latestItemUrl = 'Sorry!!!!';
@@ -289,7 +290,7 @@ class _CurveAndImageState extends State<CurveAndImage> {
   }
 }
 
-class ProfileImage extends StatelessWidget {
+class ProfileImage extends StatefulWidget {
   const ProfileImage({
     super.key,
     required this.cameraImage,
@@ -305,33 +306,38 @@ class ProfileImage extends StatelessWidget {
   final File? _galleryImageFile;
 
   @override
+  State<ProfileImage> createState() => _ProfileImageState();
+}
+
+class _ProfileImageState extends State<ProfileImage> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      width: MediaQuery.sizeOf(context).width * 0.4,
-      child: cameraImage == true
-          ? cameraImageUrl == null
-              ? const CircleAvatar(
-                  radius: 75,
-                  backgroundColor: secondaryColor,
-                  backgroundImage: AssetImage('assets/images/default.png'),
-                )
-              : CircleAvatar(
-                  radius: 75,
-                  backgroundColor: secondaryColor,
-                  backgroundImage: NetworkImage(_latestItemUrl!),
-                )
-          : galleryImageUrl != null
-              ? CircleAvatar(
-                  radius: 75,
-                  backgroundColor: secondaryColor,
-                  backgroundImage: NetworkImage(_latestItemUrl!),
-                )
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(_user!.uid)
+            .snapshots(),
+        builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (!snapshot.hasData) {
+            return Lottie.asset('assets/images/loading.json');
+          }
+          Map photoData = snapshot.data!.data() as Map;
+          String? photoUrl = photoData['userimage'];
+          print('pppppppppppppppppp:$photoUrl');
+          return photoUrl != null
+              ? Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.sizeOf(context).width * 0.4,
+                  child: CircleAvatar(
+                    radius: 75,
+                    backgroundColor: secondaryColor,
+                    backgroundImage: NetworkImage(photoUrl),
+                  ))
               : const CircleAvatar(
                   radius: 75,
                   backgroundColor: secondaryColor,
                   backgroundImage: AssetImage('assets/images/default.png'),
-                ),
-    );
+                );
+        });
   }
 }
