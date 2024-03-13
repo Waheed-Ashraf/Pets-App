@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pets_app/Features/Cats/presentation/views/cats_view.dart';
 import 'package:pets_app/Features/Dogs/presentation/views/dogs_view.dart';
+import 'package:pets_app/Features/Explore/presentation/views/home_view.dart';
 import 'package:pets_app/Features/Favorit/presentation/views/favorit_view.dart';
-import 'package:pets_app/Features/Home/presentation/views/home_view.dart';
 import 'package:pets_app/Features/Profile/presentation/views/Profile_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -22,7 +22,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
     _pages = const [
       FavoritView(),
       DogsView(),
-      HomeView(),
+      ExploreView(),
       CatsView(),
       ProfileView(),
     ];

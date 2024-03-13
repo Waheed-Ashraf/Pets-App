@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:lottie/lottie.dart';
+import 'package:animate_do/animate_do.dart';
 import 'package:pets_app/Core/utils/app_styles.dart';
 import 'package:pets_app/Core/widgets/custom_error_widget.dart';
 import 'package:pets_app/Core/widgets/custom_loading_indicator.dart';
@@ -18,40 +19,55 @@ class CatsList extends StatelessWidget {
     return BlocBuilder<CatsBreedsCubit, CatsBreedsState>(
       builder: (context, state) {
         if (state is CatsBreedsLoaded) {
-          return MasonryGridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: state.catsBreedsList.length,
-            gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: crossAxisCount),
-            itemBuilder: (BuildContext context, int index) {
-              return (state.catsBreedsList[index].image) == null
-                  ? Container()
-                  : GestureDetector(
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return CatsDetailsView(
-                              cat: state.catsBreedsList[index]);
-                        }));
-                      },
-                      child: Card(
-                        elevation: 6,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16.0),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: CachedNetworkImage(
-                            imageUrl: state.catsBreedsList[index].image!.url,
-                            fit: BoxFit.cover,
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
+          return FadeInUp(
+            child: MasonryGridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: state.catsBreedsList.length,
+              gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: crossAxisCount),
+              itemBuilder: (BuildContext context, int index) {
+                return (state.catsBreedsList[index].image) == null
+                    ? Container()
+                    : GestureDetector(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return CatsDetailsView(
+                                cat: state.catsBreedsList[index]);
+                          }));
+                        },
+                        child: Card(
+                          elevation: 6,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: CachedNetworkImage(
+                              imageUrl: state.catsBreedsList[index].image!.url,
+                              fit: BoxFit.cover,
+                              placeholder: (BuildContext context, String url) =>
+                                  SizedBox(
+                                // color: Colors.white,
+                                height:
+                                    state.catsBreedsList[index].image!.height *
+                                        .12,
+                                child: Center(
+                                  child: Lottie.asset(
+                                      'assets/images/image-placeholder.json',
+                                      width: 40,
+                                      fit: BoxFit.contain),
+                                ),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                            ),
                           ),
                         ),
-                      ),
-                    );
-            },
+                      );
+              },
+            ),
           );
         } else if (state is SearchedCatsBreedsLoaded) {
           return MasonryGridView.builder(
@@ -71,6 +87,16 @@ class CatsList extends StatelessWidget {
                   child: CachedNetworkImage(
                     imageUrl: state.searchCatBreed[index].url,
                     fit: BoxFit.cover,
+                    placeholder: (BuildContext context, String url) => SizedBox(
+                      // color: Colors.white,
+                      height: state.searchCatBreed[index].height * .12,
+                      child: Center(
+                        child: Lottie.asset(
+                            'assets/images/image-placeholder.json',
+                            width: 40,
+                            fit: BoxFit.contain),
+                      ),
+                    ),
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.error),
                   ),
