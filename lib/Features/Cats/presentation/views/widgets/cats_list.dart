@@ -1,13 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pets_app/Core/utils/app_styles.dart';
 import 'package:pets_app/Core/widgets/custom_error_widget.dart';
 import 'package:pets_app/Core/widgets/custom_loading_indicator.dart';
-import 'package:pets_app/Features/Cats/data/Models/CatsModels/cats_model.dart';
 import 'package:pets_app/Features/Cats/presentation/controller/CatsBreedsCubit/cats_breeds_cubit.dart';
 import 'package:pets_app/Features/Cats/presentation/views/widgets/cats_details_view.dart';
 

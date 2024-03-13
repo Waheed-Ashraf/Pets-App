@@ -14,7 +14,23 @@ class CatsDetailsView extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              {cat.countryCodes}.toString(),
+              cat.description,
+              style: const TextStyle(color: Colors.black),
+            ),
+            Text(
+              cat.countryCodes,
+              style: const TextStyle(color: Colors.black),
+            ),
+            Text(
+              cat.altNames,
+              style: const TextStyle(color: Colors.black),
+            ),
+            Text(
+              cat.temperament,
+              style: const TextStyle(color: Colors.black),
+            ),
+            Text(
+              cat.lifeSpan,
               style: const TextStyle(color: Colors.black),
             ),
           ],
