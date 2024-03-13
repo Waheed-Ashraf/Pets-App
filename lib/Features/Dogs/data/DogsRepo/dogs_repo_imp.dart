@@ -34,7 +34,7 @@ class DogsRepoImp implements DogsRepo {
       fetchSearchedDogsBreedsList({required String breedsId}) async {
     try {
       var data = await _apiService.get(
-          endPoint: ApiConstance.searchByDogBreedsId(breedsId));
+          endPoint: ApiConstance.searchByCatBreedsId(breedsId));
       List<SearchDogsByBreedsIdModel> itemData = [];
       for (var element in data) {
         itemData.add(SearchDogsByBreedsIdModel.fromJson(element));

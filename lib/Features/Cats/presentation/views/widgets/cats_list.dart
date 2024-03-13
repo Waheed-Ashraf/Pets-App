@@ -7,7 +7,9 @@ import 'package:lottie/lottie.dart';
 import 'package:pets_app/Core/utils/app_styles.dart';
 import 'package:pets_app/Core/widgets/custom_error_widget.dart';
 import 'package:pets_app/Core/widgets/custom_loading_indicator.dart';
+import 'package:pets_app/Features/Cats/data/Models/CatsModels/cats_model.dart';
 import 'package:pets_app/Features/Cats/presentation/controller/CatsBreedsCubit/cats_breeds_cubit.dart';
+import 'package:pets_app/Features/Cats/presentation/views/widgets/cats_details_view.dart';
 
 class CatsList extends StatelessWidget {
   const CatsList({super.key});
@@ -27,18 +29,27 @@ class CatsList extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return (state.catsBreedsList[index].image) == null
                   ? Container()
-                  : Card(
-                      elevation: 6,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
-                        child: CachedNetworkImage(
-                          imageUrl: state.catsBreedsList[index].image!.url,
-                          fit: BoxFit.cover,
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
+                  : GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return CatsDetailsView(
+                              cat: state.catsBreedsList[index]);
+                        }));
+                      },
+                      child: Card(
+                        elevation: 6,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: CachedNetworkImage(
+                            imageUrl: state.catsBreedsList[index].image!.url,
+                            fit: BoxFit.cover,
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                          ),
                         ),
                       ),
                     );

@@ -322,6 +322,7 @@ class _ProfileImageState extends State<ProfileImage> {
             return Lottie.asset('assets/images/loading.json');
           }
           Map photoData = snapshot.data!.data() as Map;
+          print(photoData);
           String? photoUrl = photoData['userimage'];
           print('pppppppppppppppppp:$photoUrl');
           return photoUrl != null
