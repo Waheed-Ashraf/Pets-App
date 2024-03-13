@@ -26,8 +26,8 @@ class SearchDogsByBreedsIdModel extends Equatable {
 
     return SearchDogsByBreedsIdModel(
       breeds: breedsList ?? [],
-      id: json['id'] as String,
-      url: json['url'] as String,
+      id: json['id'],
+      url: json['url'] ?? '',
       width: json['width'] as int,
       height: json['height'] as int,
     );

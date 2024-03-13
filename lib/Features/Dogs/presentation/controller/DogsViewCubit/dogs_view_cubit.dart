@@ -27,8 +27,8 @@ class DogsViewCubit extends Cubit<DogsViewState> {
       searcheddata.fold(
           (failure) =>
               emit(DogsBreedsFailuer(errorMessage: failure.errMessage)),
-          (searchedCatsBreeds) => emit(
-              SearchedDogsBreedsLoaded(searchDogBreed: searchedCatsBreeds)));
+          (searchedDogsBreeds) => emit(
+              SearchedDogsBreedsLoaded(searchDogBreed: searchedDogsBreeds)));
     } else {
       emit(DogsBreedsListEmpty());
     }

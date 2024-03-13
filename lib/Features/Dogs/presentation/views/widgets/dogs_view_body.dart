@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pets_app/Core/widgets/custom_search_textfield.dart';
+import 'package:pets_app/Features/Dogs/presentation/controller/DogsViewCubit/dogs_view_cubit.dart';
 import 'package:pets_app/Features/Dogs/presentation/views/widgets/dogs_list.dart';
 
 class DogsViewBody extends StatelessWidget {
@@ -7,8 +9,8 @@ class DogsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(
-      physics: BouncingScrollPhysics(),
+    return CustomScrollView(
+      physics: const BouncingScrollPhysics(),
       slivers: [
         SliverAppBar(
           toolbarHeight: 70,
@@ -16,7 +18,10 @@ class DogsViewBody extends StatelessWidget {
           centerTitle: true,
           pinned: false,
           backgroundColor: Colors.transparent,
-          //  title: CustomSearchTextField(onTap: () {}),
+          title: CustomSearchTextField(onTap: (String searchedItem) {
+            BlocProvider.of<DogsViewCubit>(context)
+                .getSearchedDogsBreedsList(breedsId: searchedItem);
+          }),
         ),
         const SliverToBoxAdapter(
           child: DogsList(),

@@ -49,14 +49,14 @@ class DogBreedInfo extends Equatable {
       weight: Weight.fromJson(json['weight']),
       height: Height.fromJson(json['height']),
       id: json['id'] as int,
-      name: json['name'] as String,
-      countryCode: json['country_code'] as String,
-      bredFor: json['bred_for'] as String,
-      breedGroup: json['breed_group'] as String,
-      lifeSpan: json['life_span'] as String,
-      temperament: json['temperament'] as String,
-      origin: json['origin'] as String,
-      referenceImageId: json['reference_image_id'] as String,
+      name: json['name'] ?? '',
+      countryCode: json['country_code'] ?? '',
+      bredFor: json['bred_for'] ?? '',
+      breedGroup: json['breed_group'] ?? '',
+      lifeSpan: json['life_span'] ?? '',
+      temperament: json['temperament'] ?? '',
+      origin: json['origin'] ?? '',
+      referenceImageId: json['reference_image_id'] ?? '',
     );
   }
 }
