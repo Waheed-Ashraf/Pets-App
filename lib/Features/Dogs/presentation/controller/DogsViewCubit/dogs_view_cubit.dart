@@ -23,14 +23,14 @@ class DogsViewCubit extends Cubit<DogsViewState> {
     emit(DogsBreedsLoading());
     var searcheddata =
         await _dogsRepo.fetchSearchedDogsBreedsList(breedsId: breedsId);
-    if (searcheddata.length() != 0) {
-      searcheddata.fold(
-          (failure) =>
-              emit(DogsBreedsFailuer(errorMessage: failure.errMessage)),
-          (searchedDogsBreeds) => emit(
-              SearchedDogsBreedsLoaded(searchDogBreed: searchedDogsBreeds)));
-    } else {
-      emit(DogsBreedsListEmpty());
-    }
+    searcheddata.fold(
+        (failure) => emit(DogsBreedsFailuer(errorMessage: failure.errMessage)),
+        (searchedDogsBreeds) {
+      if (searchedDogsBreeds.isEmpty) {
+        emit(DogsBreedsListEmpty());
+      } else {
+        emit(SearchedDogsBreedsLoaded(searchDogBreed: searchedDogsBreeds));
+      }
+    });
   }
 }

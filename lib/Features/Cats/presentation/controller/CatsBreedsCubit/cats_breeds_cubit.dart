@@ -22,14 +22,14 @@ class CatsBreedsCubit extends Cubit<CatsBreedsState> {
     emit(CatsBreedsLoading());
     var searcheddata =
         await _catsRepo.fetchSearchedCatsBreedsList(breedsId: breedsId);
-    if (searcheddata.length() != 0) {
-      searcheddata.fold(
-          (failure) =>
-              emit(CatsBreedsFailuer(errorMessage: failure.errMessage)),
-          (searchedCatsBreeds) => emit(
-              SearchedCatsBreedsLoaded(searchCatBreed: searchedCatsBreeds)));
-    } else {
-      emit(CatsBreedsListEmpty());
-    }
+    searcheddata.fold(
+        (failure) => emit(CatsBreedsFailuer(errorMessage: failure.errMessage)),
+        (searchedCatsBreeds) {
+      if (searchedCatsBreeds.isEmpty) {
+        emit(CatsBreedsListEmpty());
+      } else {
+        emit(SearchedCatsBreedsLoaded(searchCatBreed: searchedCatsBreeds));
+      }
+    });
   }
 }

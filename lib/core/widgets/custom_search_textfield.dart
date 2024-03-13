@@ -30,8 +30,9 @@ class _CustomSearchTextFieldState extends State<CustomSearchTextField> {
               padding: const EdgeInsets.only(left: 16),
               child: !_folded
                   ? TextField(
+                      controller: myController,
                       onSubmitted: (value) {
-                        widget.onTap(value);
+                        widget.onTap(myController.text);
 
                         setState(() {
                           _folded = !_folded;

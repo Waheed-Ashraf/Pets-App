@@ -2,14 +2,14 @@ import 'package:equatable/equatable.dart';
 import 'package:pets_app/Features/Dogs/data/Models/SearchByDogsBreedIdModels/dog_breed_info.dart';
 
 class SearchDogsByBreedsIdModel extends Equatable {
-  final List<DogBreedInfo> breeds;
+  final List<DogBreedInfo>? breeds;
   final String id;
   final String url;
   final int width;
   final int height;
 
   const SearchDogsByBreedsIdModel({
-    required this.breeds,
+    this.breeds,
     required this.id,
     required this.url,
     required this.width,
@@ -28,8 +28,8 @@ class SearchDogsByBreedsIdModel extends Equatable {
       breeds: breedsList ?? [],
       id: json['id'],
       url: json['url'] ?? '',
-      width: json['width'] as int,
-      height: json['height'] as int,
+      width: json['width'] ?? 0,
+      height: json['height'] ?? 0,
     );
   }
 }

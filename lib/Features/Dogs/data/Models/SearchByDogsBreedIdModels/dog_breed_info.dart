@@ -3,8 +3,8 @@ import 'package:pets_app/Features/Cats/data/Models/CatsModels/cats_wights_model.
 import 'package:pets_app/Features/Dogs/data/Models/DogsBreedsModels/hight_model.dart';
 
 class DogBreedInfo extends Equatable {
-  final Weight weight;
-  final Height height;
+  final Weight? weight;
+  final Height? height;
   final int id;
   final String name;
   final String countryCode;
@@ -16,8 +16,8 @@ class DogBreedInfo extends Equatable {
   final String referenceImageId;
 
   const DogBreedInfo({
-    required this.weight,
-    required this.height,
+    this.weight,
+    this.height,
     required this.id,
     required this.name,
     required this.countryCode,
@@ -46,9 +46,9 @@ class DogBreedInfo extends Equatable {
 
   factory DogBreedInfo.fromJson(Map<String, dynamic> json) {
     return DogBreedInfo(
-      weight: Weight.fromJson(json['weight']),
-      height: Height.fromJson(json['height']),
-      id: json['id'] as int,
+      weight: json['weight'] != null ? Weight.fromJson(json['weight']) : null,
+      height: json['height'] != null ? Height.fromJson(json['height']) : null,
+      id: json['id'] ?? 0,
       name: json['name'] ?? '',
       countryCode: json['country_code'] ?? '',
       bredFor: json['bred_for'] ?? '',
