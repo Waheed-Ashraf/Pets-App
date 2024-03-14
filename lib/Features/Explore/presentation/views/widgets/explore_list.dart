@@ -7,6 +7,7 @@ import 'package:lottie/lottie.dart';
 import 'package:pets_app/Core/widgets/custom_error_widget.dart';
 import 'package:pets_app/Core/widgets/custom_loading_indicator.dart';
 import 'package:pets_app/Features/Explore/presentation/controller/ExploreCubit/explore_cubit.dart';
+import 'package:pets_app/Features/Explore/presentation/views/image_screen.dart';
 
 class ExploreList extends StatelessWidget {
   const ExploreList({super.key});
@@ -24,29 +25,41 @@ class ExploreList extends StatelessWidget {
               gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: crossAxisCount),
               itemBuilder: (BuildContext context, int index) {
-                return Card(
-                  elevation: 6,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: CachedNetworkImage(
-                      imageUrl: state.exploreImagesList[index].url,
-                      fit: BoxFit.cover,
-                      placeholder: (BuildContext context, String url) =>
-                          SizedBox(
-                        // color: Colors.white,
-                        height: state.exploreImagesList[index].height * .12,
-                        child: Center(
-                          child: Lottie.asset(
-                              'assets/images/image-placeholder.json',
-                              width: 40,
-                              fit: BoxFit.contain),
-                        ),
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ImageScreen(
+                            imageUrl: state.exploreImagesList[index].url,
+                            heroTag: state.exploreImagesList[index].url),
                       ),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
+                    );
+                  },
+                  child: Card(
+                    elevation: 6,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: CachedNetworkImage(
+                        imageUrl: state.exploreImagesList[index].url,
+                        fit: BoxFit.cover,
+                        placeholder: (BuildContext context, String url) =>
+                            SizedBox(
+                          // color: Colors.white,
+                          height: state.exploreImagesList[index].height * .12,
+                          child: Center(
+                            child: Lottie.asset(
+                                'assets/images/image-placeholder.json',
+                                width: 40,
+                                fit: BoxFit.contain),
+                          ),
+                        ),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      ),
                     ),
                   ),
                 );
