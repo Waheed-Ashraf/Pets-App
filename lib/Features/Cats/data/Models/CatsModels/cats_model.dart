@@ -37,7 +37,7 @@ class CatModel extends Equatable {
   final String wikipediaUrl;
   final int hypoallergenic;
   final String referenceImageId;
-  final Image? image;
+  final ImageModel? image;
 
   const CatModel({
     this.weight,
@@ -113,7 +113,7 @@ class CatModel extends Equatable {
       wikipediaUrl: json['wikipedia_url'] ?? '',
       hypoallergenic: json['hypoallergenic'] ?? 0,
       referenceImageId: json['reference_image_id'] ?? '',
-      image: json['image'] != null ? Image.fromJson(json['image']) : null,
+      image: json['image'] != null ? ImageModel.fromJson(json['image']) : null,
     );
   }
 

@@ -14,7 +14,7 @@ class DogModel extends Equatable {
   final String temperament;
   final String origin;
   final String referenceImageId;
-  final Image? image;
+  final ImageModel? image;
 
   const DogModel({
     required this.weight,
@@ -57,7 +57,7 @@ class DogModel extends Equatable {
       temperament: json['temperament'] ?? '',
       origin: json['origin'] ?? '',
       referenceImageId: json['reference_image_id'] ?? '',
-      image: json['image'] != null ? Image.fromJson(json['image']) : null,
+      image: json['image'] != null ? ImageModel.fromJson(json['image']) : null,
     );
   }
 }
