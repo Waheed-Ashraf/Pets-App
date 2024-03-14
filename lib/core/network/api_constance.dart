@@ -16,4 +16,8 @@ class ApiConstance {
 
   static String searchByDogBreedsId(String breedsId) =>
       "$dogsBaseUrl/images/search?limit=10&breed_ids=$breedsId&api_key=$dogsApiKey";
+
+  static const String catsImagesList = "$baseUrl/images/search?limit=10";
+
+  static const String dogsImagesList = "$dogsBaseUrl/images/search?limit=10";
 }
