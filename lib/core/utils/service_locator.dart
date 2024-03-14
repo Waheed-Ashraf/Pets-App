@@ -7,6 +7,9 @@ import 'package:pets_app/Features/Cats/presentation/controller/CatsBreedsCubit/c
 import 'package:pets_app/Features/Dogs/data/DogsRepo/dogs_repo.dart';
 import 'package:pets_app/Features/Dogs/data/DogsRepo/dogs_repo_imp.dart';
 import 'package:pets_app/Features/Dogs/presentation/controller/DogsViewCubit/dogs_view_cubit.dart';
+import 'package:pets_app/Features/Explore/data/ExploreRepo/explore_repo.dart';
+import 'package:pets_app/Features/Explore/data/ExploreRepo/explore_repo_imp.dart';
+import 'package:pets_app/Features/Explore/presentation/controller/ExploreCubit/explore_cubit.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -14,30 +17,31 @@ void serviceLocator() {
   // cubit
   getIt.registerFactory<CatsBreedsCubit>(() => CatsBreedsCubit(getIt()));
   getIt.registerFactory<DogsViewCubit>(() => DogsViewCubit(getIt()));
+  getIt.registerFactory<ExploreCubit>(() => ExploreCubit(getIt()));
 
   //Repo
   getIt.registerLazySingleton<CatsRepo>(() => CatsRepoImp(getIt()));
   getIt.registerLazySingleton<DogsRepo>(() => DogsRepoImp(getIt()));
+  getIt.registerLazySingleton<ExploreRepo>(() => ExploreRepoImp(getIt()));
 
   //webServices
   getIt.registerLazySingleton<ApiService>(() => ApiService(Dio()));
-
-  Dio createAndSetupDio() {
-    Dio dio = Dio();
-
-    dio
-      ..options.connectTimeout = (200 * 1000) as Duration?
-      ..options.receiveTimeout = (200 * 1000) as Duration?;
-
-    dio.interceptors.add(LogInterceptor(
-      responseBody: true,
-      error: true,
-      requestHeader: false,
-      responseHeader: false,
-      request: true,
-      requestBody: true,
-    ));
-
-    return dio;
-  }
 }
+//  Dio createAndSetupDio() {
+//     Dio dio = Dio();
+
+//     dio
+//       ..options.connectTimeout = (200 * 1000) as Duration?
+//       ..options.receiveTimeout = (200 * 1000) as Duration?;
+
+//     dio.interceptors.add(LogInterceptor(
+//       responseBody: true,
+//       error: true,
+//       requestHeader: false,
+//       responseHeader: false,
+//       request: true,
+//       requestBody: true,
+//     ));
+
+//     return dio;
+//   }
