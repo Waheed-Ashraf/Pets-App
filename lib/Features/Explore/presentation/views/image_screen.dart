@@ -16,15 +16,16 @@ class ImageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[600],
+      backgroundColor: Colors.black,
       appBar: AppBar(
+        backgroundColor: Colors.black,
         title: const Text('Image'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _downloadImage(context, imageUrl);
         },
-        child: Icon(Icons.download),
+        child: const Icon(Icons.download),
       ),
       body: Center(
         child: Hero(

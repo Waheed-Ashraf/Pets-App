@@ -25,6 +25,9 @@ class ExploreRepoImp implements ExploreRepo {
       for (var element in dogsImages) {
         itemData.add(ImageModel.fromJson(element));
       }
+      // Shuffle the list randomly
+      itemData.shuffle();
+
       return right(itemData);
     } catch (e) {
       if (e is DioException) {

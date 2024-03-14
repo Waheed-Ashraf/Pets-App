@@ -32,7 +32,7 @@ class ExploreList extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) => ImageScreen(
                             imageUrl: state.exploreImagesList[index].url,
-                            heroTag: state.exploreImagesList[index].url),
+                            heroTag: index.toString()),
                       ),
                     );
                   },
@@ -51,10 +51,13 @@ class ExploreList extends StatelessWidget {
                           // color: Colors.white,
                           height: state.exploreImagesList[index].height * .12,
                           child: Center(
-                            child: Lottie.asset(
-                                'assets/images/image-placeholder.json',
-                                width: 40,
-                                fit: BoxFit.contain),
+                            child: Hero(
+                              tag: index.toString(),
+                              child: Lottie.asset(
+                                  'assets/images/image-placeholder.json',
+                                  width: 40,
+                                  fit: BoxFit.contain),
+                            ),
                           ),
                         ),
                         errorWidget: (context, url, error) =>
