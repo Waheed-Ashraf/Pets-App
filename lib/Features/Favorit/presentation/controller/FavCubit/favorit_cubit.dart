@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pets_app/Features/Favorit/data/FavRepo/fav_repo.dart';
 
 part 'favorit_state.dart';
@@ -10,9 +10,9 @@ class FavoritCubit extends Cubit<FavoritState> {
 
   bool itemAddedToFav = false;
 
-  Future fetchFavoritList({required String breedsId}) async {
+  Future fetchFavoritList({required String imageId}) async {
     if (itemAddedToFav) {
-      var data = await _favRepo.fetchFavoritList(breedsId: breedsId);
+      var data = await _favRepo.fetchFavoritList(breedsId: imageId);
       data.fold((l) => emit(FavoritError(l.errMessage)),
           (r) => emit(FavoritItemAdded(favList: r)));
     } else {}
