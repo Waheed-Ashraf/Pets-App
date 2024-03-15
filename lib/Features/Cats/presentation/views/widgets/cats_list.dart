@@ -70,39 +70,42 @@ class CatsList extends StatelessWidget {
             ),
           );
         } else if (state is SearchedCatsBreedsLoaded) {
-          return MasonryGridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: state.searchCatBreed.length,
-            gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: crossAxisCount),
-            itemBuilder: (BuildContext context, int index) {
-              return Card(
-                elevation: 6,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: CachedNetworkImage(
-                    imageUrl: state.searchCatBreed[index].url,
-                    fit: BoxFit.cover,
-                    placeholder: (BuildContext context, String url) => SizedBox(
-                      // color: Colors.white,
-                      height: state.searchCatBreed[index].height * .12,
-                      child: Center(
-                        child: Lottie.asset(
-                            'assets/images/image-placeholder.json',
-                            width: 40,
-                            fit: BoxFit.contain),
-                      ),
-                    ),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
+          return FadeInUp(
+            child: MasonryGridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: state.searchCatBreed.length,
+              gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: crossAxisCount),
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                  elevation: 6,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16.0),
                   ),
-                ),
-              );
-            },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: CachedNetworkImage(
+                      imageUrl: state.searchCatBreed[index].url,
+                      fit: BoxFit.cover,
+                      placeholder: (BuildContext context, String url) =>
+                          SizedBox(
+                        // color: Colors.white,
+                        height: state.searchCatBreed[index].height * .12,
+                        child: Center(
+                          child: Lottie.asset(
+                              'assets/images/image-placeholder.json',
+                              width: 40,
+                              fit: BoxFit.contain),
+                        ),
+                      ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    ),
+                  ),
+                );
+              },
+            ),
           );
         } else if (state is CatsBreedsListEmpty) {
           return Padding(

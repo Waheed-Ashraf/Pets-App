@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,20 +27,33 @@ class DogsList extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return (state.dogsBreedsList[index].image) == null
                   ? Container()
-                  : Card(
-                      elevation: 6,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
-                        child: CachedNetworkImage(
-                          imageUrl: state.dogsBreedsList[index].image!.url,
-                          fit: BoxFit.cover,
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                        ),
-                      ),
+                  : FadeInUp(
+                      child: Card(
+                          elevation: 6,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: CachedNetworkImage(
+                              imageUrl: state.dogsBreedsList[index].image!.url,
+                              fit: BoxFit.cover,
+                              placeholder: (BuildContext context, String url) =>
+                                  SizedBox(
+                                height:
+                                    state.dogsBreedsList[index].image!.height *
+                                        .12,
+                                child: Center(
+                                  child: Lottie.asset(
+                                      'assets/images/image-placeholder.json',
+                                      width: 40,
+                                      fit: BoxFit.contain),
+                                ),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                            ),
+                          )),
                     );
             },
           );
@@ -51,22 +65,35 @@ class DogsList extends StatelessWidget {
             gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: crossAxisCount),
             itemBuilder: (BuildContext context, int index) {
-              return Card(
-                elevation: 6,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.0),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: state.searchDogBreed[index].url == ''
-                      ? Container()
-                      : CachedNetworkImage(
-                          imageUrl: state.searchDogBreed[index].url,
-                          fit: BoxFit.cover,
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                        ),
-                ),
+              return FadeInUp(
+                child: Card(
+                    elevation: 6,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: state.searchDogBreed[index].url == ''
+                          ? Container()
+                          : CachedNetworkImage(
+                              imageUrl: state.searchDogBreed[index].url,
+                              fit: BoxFit.cover,
+                              placeholder: (BuildContext context, String url) =>
+                                  SizedBox(
+                                // color: Colors.white,
+                                height:
+                                    state.searchDogBreed[index].height * .12,
+                                child: Center(
+                                  child: Lottie.asset(
+                                      'assets/images/image-placeholder.json',
+                                      width: 40,
+                                      fit: BoxFit.contain),
+                                ),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                            ),
+                    )),
               );
             },
           );
