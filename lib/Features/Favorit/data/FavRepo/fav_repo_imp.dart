@@ -10,7 +10,7 @@ class FavRepoImp implements FavRepo {
 
   FavRepoImp(this._apiService);
   @override
-  Future<Either<Failure, List>> fetchSearchedCatsBreedsList(
+  Future<Either<Failure, List>> fetchFavoritList(
       {required String breedsId}) async {
     try {
       var fevItem = await _apiService.post(
