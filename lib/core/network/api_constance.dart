@@ -20,4 +20,9 @@ class ApiConstance {
   static const String catsImagesList = "$baseUrl/images/search?limit=10";
 
   static const String dogsImagesList = "$dogsBaseUrl/images/search?limit=10";
+
+  static const String catsFavEndPoin =
+      "https://api.thecatapi.com/v1/favourites";
+  static const String dogsFavEndPoin =
+      "https://api.thedogapi.com/v1/favourites";
 }
