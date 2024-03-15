@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:pets_app/Features/Cats/data/Models/CatsModels/cats_model.dart';
 import 'package:pets_app/Features/Cats/presentation/views/widgets/custom_info_widgets.dart';
 import 'package:pets_app/core/utils/app_styles.dart';
 import 'package:pets_app/core/utils/colors.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:pets_app/core/widgets/custom_button.dart';
 
 class CatInformation extends StatelessWidget {
   const CatInformation({
@@ -36,298 +38,254 @@ class CatInformation extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.only(top: 10, bottom: 8),
-          child: Row(
+          child: Column(
             children: [
-              Text(
-                'Weight:',
-                style: AppStyles.styleSemiBold18.copyWith(color: primaryColor),
-              ),
-              const SizedBox(
-                width: 30,
-              ),
-              Text(
-                cat.weight!.imperial!,
-                style: AppStyles.styleMedium18.copyWith(color: secondaryColor),
-              ),
-              const SizedBox(
-                width: 15,
-              ),
-              Text(
-                'Kg',
-                style: AppStyles.styleMedium18.copyWith(color: secondaryColor),
+              Table(
+                border: TableBorder.all(
+                    color: primaryColor,
+                    width: 1.5,
+                    borderRadius: BorderRadius.circular(10)),
+                children: [
+                  TableRow(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TableCell(
+                          child: Center(
+                            child: Text(
+                              'Weight',
+                              style: AppStyles.styleSemiBold16
+                                  .copyWith(color: primaryColor),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TableCell(
+                          child: Center(
+                            child: Text(
+                              '${cat.weight!.imperial!} Kg',
+                              style: AppStyles.styleMedium16
+                                  .copyWith(color: secondaryColor),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  TableRow(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TableCell(
+                          child: Center(
+                            child: Text(
+                              'Origin',
+                              style: AppStyles.styleSemiBold16
+                                  .copyWith(color: primaryColor),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TableCell(
+                          child: Center(
+                            child: Text(
+                              cat.origin,
+                              style: AppStyles.styleMedium16
+                                  .copyWith(color: secondaryColor),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  TableRow(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TableCell(
+                          child: Center(
+                            child: Text(
+                              'Life Span',
+                              style: AppStyles.styleSemiBold16
+                                  .copyWith(color: primaryColor),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TableCell(
+                          child: Center(
+                            child: Text(
+                              cat.lifeSpan,
+                              style: AppStyles.styleMedium16
+                                  .copyWith(color: secondaryColor),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),
-        ),
-        Row(
-          children: [
-            Text(
-              'Origin:',
-              style: AppStyles.styleSemiBold18.copyWith(color: primaryColor),
-            ),
-            const SizedBox(
-              width: 30,
-            ),
-            Text(
-              cat.origin,
-              style: AppStyles.styleMedium18.copyWith(color: secondaryColor),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Row(
-          children: [
-            Text(
-              'Life Span:',
-              style: AppStyles.styleSemiBold18.copyWith(color: primaryColor),
-            ),
-            const SizedBox(
-              width: 30,
-            ),
-            Text(
-              cat.lifeSpan,
-              style: AppStyles.styleMedium18.copyWith(color: secondaryColor),
-            ),
-          ],
         ),
         const SizedBox(
           height: 10,
         ),
         Text(
           'Description:',
-          style: AppStyles.styleSemiBold18.copyWith(color: primaryColor),
+          style: AppStyles.styleSemiBold16.copyWith(color: primaryColor),
         ),
         const SizedBox(
           height: 8,
         ),
         Text(
           cat.description,
-          style: AppStyles.styleMedium18.copyWith(color: secondaryColor),
+          style: AppStyles.styleMedium16.copyWith(color: secondaryColor),
+        ),
+        const Divider(
+          color: primaryColor, // You can set the color of the divider
+          thickness: 2, // You can set the thickness of the divider
+          height: 35, // You can set the height of the divider
+        ),
+        Text(
+          'Characteristics:',
+          style: AppStyles.styleSemiBold16.copyWith(color: primaryColor),
         ),
         const SizedBox(
-          height: 20,
+          height: 10,
+        ),
+        SizedBox(
+          height: 90,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              CustomInfoWidget(
+                cat: cat,
+                text: 'Indoor',
+                percent: cat.indoor.toDouble(),
+                centerText: cat.indoor.toString(),
+              ),
+              CustomInfoWidget(
+                cat: cat,
+                text: 'Lap',
+                percent: cat.lap.toDouble() / 5,
+                centerText: cat.lap.toString(),
+              ),
+              CustomInfoWidget(
+                cat: cat,
+                text: 'Rare',
+                percent: cat.rare.toDouble() / 5,
+                centerText: cat.rare.toString(),
+              ),
+              CustomInfoWidget(
+                cat: cat,
+                text: 'Rex',
+                percent: cat.rex.toDouble() / 5,
+                centerText: cat.rex.toString(),
+              ),
+              CustomInfoWidget(
+                cat: cat,
+                text: 'Natural',
+                percent: cat.natural.toDouble() / 5,
+                centerText: cat.natural.toString(),
+              ),
+              CustomInfoWidget(
+                cat: cat,
+                text: 'Short Legs',
+                percent: cat.shortLegs.toDouble() / 5,
+                centerText: cat.shortLegs.toString(),
+              ),
+              CustomInfoWidget(
+                cat: cat,
+                text: 'Child Friendly',
+                percent: cat.childFriendly.toDouble() / 5,
+                centerText: cat.childFriendly.toString(),
+              ),
+              CustomInfoWidget(
+                cat: cat,
+                text: 'Dog Friendly',
+                percent: cat.dogFriendly.toDouble() / 5,
+                centerText: cat.dogFriendly.toString(),
+              ),
+              CustomInfoWidget(
+                cat: cat,
+                text: 'Grooming',
+                percent: cat.grooming.toDouble() / 5,
+                centerText: cat.grooming.toString(),
+              ),
+              CustomInfoWidget(
+                cat: cat,
+                text: 'Adaptability',
+                percent: cat.adaptability.toDouble() / 5,
+                centerText: cat.adaptability.toString(),
+              ),
+              CustomInfoWidget(
+                cat: cat,
+                text: 'Hairless',
+                percent: cat.hairless.toDouble() / 5,
+                centerText: cat.hairless.toString(),
+              ),
+              CustomInfoWidget(
+                cat: cat,
+                text: 'Social Needs',
+                percent: cat.socialNeeds.toDouble() / 5,
+                centerText: cat.socialNeeds.toString(),
+              ),
+              CustomInfoWidget(
+                cat: cat,
+                text: 'Shedding Level',
+                percent: cat.sheddingLevel.toDouble() / 5,
+                centerText: cat.sheddingLevel.toString(),
+              ),
+              CustomInfoWidget(
+                cat: cat,
+                text: 'Stranger Friendly',
+                percent: cat.strangerFriendly.toDouble() / 5,
+                centerText: cat.strangerFriendly.toString(),
+              ),
+              CustomInfoWidget(
+                cat: cat,
+                text: 'Vocalisation',
+                percent: cat.vocalisation.toDouble() / 5,
+                centerText: cat.vocalisation.toString(),
+              ),
+              CustomInfoWidget(
+                cat: cat,
+                text: 'Experimental',
+                percent: cat.experimental.toDouble() / 5,
+                centerText: cat.experimental.toString(),
+              ),
+            ],
+          ),
+        ),
+        const Divider(
+          color: primaryColor, // You can set the color of the divider
+          thickness: 2, // You can set the thickness of the divider
+          height: 35, // You can set the height of the divider
         ),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: CustomInfoWidget(
-                    cat: cat,
-                    text: 'Indoor',
-                    percent: cat.indoor.toDouble(),
-                    centerText: cat.indoor.toString(),
-                  ),
-                ),
-                Expanded(
-                  child: CustomInfoWidget(
-                    cat: cat,
-                    text: 'Lap',
-                    percent: cat.lap.toDouble() / 10,
-                    centerText: cat.lap.toString(),
-                  ),
-                ),
-              ],
+            Text(
+              'Read more on wikipedia:',
+              style: AppStyles.styleSemiBold18.copyWith(color: primaryColor),
             ),
             const SizedBox(
-              height: 20,
+              height: 8,
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: CustomInfoWidget(
-                    cat: cat,
-                    text: 'Rare',
-                    percent: cat.rare.toDouble() / 10,
-                    centerText: cat.rare.toString(),
-                  ),
-                ),
-                Expanded(
-                  child: CustomInfoWidget(
-                    cat: cat,
-                    text: 'Rex',
-                    percent: cat.rex.toDouble() / 10,
-                    centerText: cat.rex.toString(),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: CustomInfoWidget(
-                    cat: cat,
-                    text: 'Natural',
-                    percent: cat.natural.toDouble() / 10,
-                    centerText: cat.natural.toString(),
-                  ),
-                ),
-                Expanded(
-                  child: CustomInfoWidget(
-                    cat: cat,
-                    text: 'Short Legs',
-                    percent: cat.shortLegs.toDouble() / 10,
-                    centerText: cat.shortLegs.toString(),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: CustomInfoWidget(
-                    cat: cat,
-                    text: 'Child Friendly',
-                    percent: cat.childFriendly.toDouble() / 10,
-                    centerText: cat.childFriendly.toString(),
-                  ),
-                ),
-                Expanded(
-                  child: CustomInfoWidget(
-                    cat: cat,
-                    text: 'Dog Friendly',
-                    percent: cat.dogFriendly.toDouble() / 10,
-                    centerText: cat.dogFriendly.toString(),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: CustomInfoWidget(
-                    cat: cat,
-                    text: 'Grooming',
-                    percent: cat.grooming.toDouble() / 10,
-                    centerText: cat.grooming.toString(),
-                  ),
-                ),
-                Expanded(
-                  child: CustomInfoWidget(
-                    cat: cat,
-                    text: 'Adaptability',
-                    percent: cat.adaptability.toDouble() / 10,
-                    centerText: cat.adaptability.toString(),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: CustomInfoWidget(
-                    cat: cat,
-                    text: 'Hairless',
-                    percent: cat.hairless.toDouble() / 10,
-                    centerText: cat.hairless.toString(),
-                  ),
-                ),
-                Expanded(
-                  child: CustomInfoWidget(
-                    cat: cat,
-                    text: 'Social Needs',
-                    percent: cat.socialNeeds.toDouble() / 10,
-                    centerText: cat.socialNeeds.toString(),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: CustomInfoWidget(
-                    cat: cat,
-                    text: 'Shedding Level',
-                    percent: cat.sheddingLevel.toDouble() / 10,
-                    centerText: cat.sheddingLevel.toString(),
-                  ),
-                ),
-                Expanded(
-                  child: CustomInfoWidget(
-                    cat: cat,
-                    text: 'Stranger Friendly',
-                    percent: cat.strangerFriendly.toDouble() / 10,
-                    centerText: cat.strangerFriendly.toString(),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: CustomInfoWidget(
-                    cat: cat,
-                    text: 'Vocalisation',
-                    percent: cat.vocalisation.toDouble() / 10,
-                    centerText: cat.vocalisation.toString(),
-                  ),
-                ),
-                Expanded(
-                  child: CustomInfoWidget(
-                    cat: cat,
-                    text: 'Experimental',
-                    percent: cat.experimental.toDouble() / 10,
-                    centerText: cat.experimental.toString(),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Read more on wikipedia:',
-                  style:
-                      AppStyles.styleSemiBold18.copyWith(color: primaryColor),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: InkWell(
-                    onTap: () {
-                      launchURLBrowser() async {
-                        var url = Uri.parse(cat.wikipediaUrl);
-                        if (await canLaunchUrl(url)) {
-                          await launchUrl(url);
-                        } else {
-                          throw 'Could not launch $url';
-                        }
-                      }
-                    },
-                    child: Text(
-                      cat.wikipediaUrl,
-                      style: AppStyles.styleMedium18
-                          .copyWith(color: secondaryColor),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            Padding(
+                padding: const EdgeInsets.only(left: 90, right: 90),
+                child: CustomButton(
+                  text: 'Read more...',
+                  onPressed: () {},
+                )),
           ],
         ),
       ],

@@ -19,29 +19,32 @@ class CustomInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          overflow: TextOverflow.ellipsis,
-          text,
-          style: AppStyles.styleSemiBold18.copyWith(color: primaryColor),
-        ),
-        const SizedBox(
-          height: 5,
-        ),
-        CircularPercentIndicator(
-          radius: 30,
-          lineWidth: 8,
-          percent: percent,
-          center: Text(
-            centerText,
-            style: AppStyles.styleRegular16.copyWith(),
+    return Padding(
+      padding: const EdgeInsets.only(right: 20),
+      child: Column(
+        children: [
+          Text(
+            overflow: TextOverflow.ellipsis,
+            text,
+            style: AppStyles.styleSemiBold16.copyWith(color: primaryColor),
           ),
-          animation: true,
-          progressColor: secondaryColor,
-          circularStrokeCap: CircularStrokeCap.round,
-        )
-      ],
+          const SizedBox(
+            height: 5,
+          ),
+          CircularPercentIndicator(
+            radius: 30,
+            lineWidth: 8,
+            percent: percent,
+            center: Text(
+              centerText,
+              style: AppStyles.styleRegular16.copyWith(),
+            ),
+            animation: true,
+            progressColor: secondaryColor,
+            circularStrokeCap: CircularStrokeCap.round,
+          )
+        ],
+      ),
     );
   }
 }
