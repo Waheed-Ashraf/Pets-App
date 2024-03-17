@@ -11,7 +11,7 @@ class FavRepoImp implements FavRepo {
 
   FavRepoImp(this._apiService);
   @override
-  Future<Either<Failure, List<String>>> addToFavoritList(
+  Future<Either<Failure, String>> addToFavoritList(
       {required String breedsId}) async {
     try {
       var fevItem = await _apiService.post(
@@ -21,11 +21,7 @@ class FavRepoImp implements FavRepo {
           },
           apiKey: ApiConstance.apiKey);
 
-      List<String> favItemIdList = [];
-      for (var element in fevItem['id']) {
-        favItemIdList.add(element);
-      }
-      return right(favItemIdList);
+      return fevItem['message'];
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioError(e));

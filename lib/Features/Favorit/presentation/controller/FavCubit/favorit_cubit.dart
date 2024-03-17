@@ -14,4 +14,16 @@ class FavoritCubit extends Cubit<FavoritState> {
     data.fold((l) => emit(FavoritError(l.errMessage)),
         (r) => emit(FavoritItemLoaded(favList: r)));
   }
+
+  Future addItemToFavoritList(String breedsId) async {
+    var data = await _favRepo.addToFavoritList(breedsId: breedsId);
+    data.fold((l) => emit(FavoritError(l.errMessage)),
+        (r) => emit(FavoritItemAdded(addedMessage: r)));
+  }
+
+  Future deletItemFromFavoritList(String favItemId) async {
+    var data = await _favRepo.deleteFromFavoritList(favItemId: favItemId);
+    data.fold((l) => emit(FavoritError(l.errMessage)),
+        (r) => emit(FavoritItemDeleted(deletedMessage: r)));
+  }
 }
