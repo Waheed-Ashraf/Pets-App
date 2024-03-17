@@ -5,14 +5,22 @@ class ApiService {
 
   ApiService(this._dio);
 
-  Future<List<dynamic>> get({required String endPoint}) async {
-    Response response = await _dio.get(endPoint);
+  Future<List<dynamic>> get({required String endPoint, String? apiKey}) async {
+    Map<String, dynamic> headers = {
+      'x-api-key': apiKey,
+    };
+    Response response = await _dio.get(
+      endPoint,
+      options: Options(
+        headers: headers,
+      ),
+    );
 
     return response.data;
   }
 
   //==================================>>>>
-  Future<List<T>> post<T>({
+  Future<Map<String, dynamic>> post({
     required String endPoint,
     required Map<String, dynamic> body,
     required String apiKey,
@@ -29,7 +37,25 @@ class ApiService {
       ),
     );
 
-    return response.data
-        .cast<T>(); // Assume T is the expected type of response data
+    return response.data;
+  }
+
+  //==================================>>>>
+  Future<Map<String, dynamic>> delete({
+    required String endPoint,
+    required String apiKey,
+  }) async {
+    Map<String, dynamic> headers = {
+      'x-api-key': apiKey,
+    };
+
+    Response response = await _dio.delete(
+      endPoint,
+      options: Options(
+        headers: headers,
+      ),
+    );
+
+    return response.data;
   }
 }

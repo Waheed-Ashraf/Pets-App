@@ -10,6 +10,9 @@ import 'package:pets_app/Features/Dogs/presentation/controller/DogsViewCubit/dog
 import 'package:pets_app/Features/Explore/data/ExploreRepo/explore_repo.dart';
 import 'package:pets_app/Features/Explore/data/ExploreRepo/explore_repo_imp.dart';
 import 'package:pets_app/Features/Explore/presentation/controller/ExploreCubit/explore_cubit.dart';
+import 'package:pets_app/Features/Favorit/data/FavRepo/fav_repo.dart';
+import 'package:pets_app/Features/Favorit/data/FavRepo/fav_repo_imp.dart';
+import 'package:pets_app/Features/Favorit/presentation/controller/FavCubit/favorit_cubit.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -18,11 +21,13 @@ void serviceLocator() {
   getIt.registerFactory<CatsBreedsCubit>(() => CatsBreedsCubit(getIt()));
   getIt.registerFactory<DogsViewCubit>(() => DogsViewCubit(getIt()));
   getIt.registerFactory<ExploreCubit>(() => ExploreCubit(getIt()));
+  getIt.registerFactory<FavoritCubit>(() => FavoritCubit(getIt()));
 
   //Repo
   getIt.registerLazySingleton<CatsRepo>(() => CatsRepoImp(getIt()));
   getIt.registerLazySingleton<DogsRepo>(() => DogsRepoImp(getIt()));
   getIt.registerLazySingleton<ExploreRepo>(() => ExploreRepoImp(getIt()));
+  getIt.registerLazySingleton<FavRepo>(() => FavRepoImp(getIt()));
 
   //webServices
   getIt.registerLazySingleton<ApiService>(() => ApiService(Dio()));

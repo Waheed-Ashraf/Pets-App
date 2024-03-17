@@ -9,17 +9,13 @@ sealed class FavoritState extends Equatable {
 
 final class FavoritInitial extends FavoritState {}
 
-final class FavoritItemAdded extends FavoritState {
-  final List<dynamic> favList;
+final class FavoritItemLoaded extends FavoritState {
+  final List<FavoritModel> favList;
 
-  const FavoritItemAdded({required this.favList});
+  const FavoritItemLoaded({required this.favList});
 }
 
-final class FavoritItemDeleted extends FavoritState {
-  final List<dynamic> favList;
-
-  const FavoritItemDeleted({required this.favList});
-}
+final class FavoritItemLoading extends FavoritState {}
 
 final class FavoritError extends FavoritState {
   final String errorMessage;
