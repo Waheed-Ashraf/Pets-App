@@ -9,6 +9,7 @@ import 'package:pets_app/Core/widgets/custom_error_widget.dart';
 import 'package:pets_app/Core/widgets/custom_loading_indicator.dart';
 import 'package:pets_app/Features/Cats/presentation/controller/CatsBreedsCubit/cats_breeds_cubit.dart';
 import 'package:pets_app/Features/Cats/presentation/views/widgets/cats_details_view.dart';
+import 'package:pets_app/Features/Favorit/data/FavRepo/fav_repo_imp.dart';
 
 class CatsList extends StatelessWidget {
   const CatsList({super.key});
@@ -34,7 +35,8 @@ class CatsList extends StatelessWidget {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                             return CatsDetailsView(
-                                cat: state.catsBreedsList[index]);
+                              cat: state.catsBreedsList[index],
+                            );
                           }));
                         },
                         child: Card(

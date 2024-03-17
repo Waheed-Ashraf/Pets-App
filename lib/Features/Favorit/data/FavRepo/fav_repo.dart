@@ -10,6 +10,4 @@ abstract class FavRepo {
       {required int favItemId});
 
   Future<Either<Failure, List<FavoritModel>>> fetchAllFivoritsList();
-
-  List<int> favoritItemsIds();
 }

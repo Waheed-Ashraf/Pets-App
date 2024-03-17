@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pets_app/Features/Cats/data/Models/CatsModels/cats_model.dart';
 import 'package:pets_app/Features/Cats/presentation/views/widgets/cat_characteristics_list.dart';
+import 'package:pets_app/Features/Favorit/data/Models/favorit_models.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/FavCubit/favorit_cubit.dart';
 import 'package:pets_app/Features/Favorit/presentation/views/widgets/favorit_button.dart';
 import 'package:pets_app/core/utils/app_styles.dart';
@@ -13,9 +14,11 @@ class CatInformation extends StatelessWidget {
   const CatInformation({
     super.key,
     required this.cat,
+    this.favoritModel,
   });
 
   final CatModel cat;
+  final FavoritModel? favoritModel;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +33,26 @@ class CatInformation extends StatelessWidget {
                 cat.name,
                 style: AppStyles.styleSemiBold24.copyWith(color: primaryColor),
               ),
-              FavoritButton(onPressed: () {
-                BlocProvider.of<FavoritCubit>(context)
-                    .addItemToFavoritList(cat.image!.id);
-              }),
+              BlocBuilder<FavoritCubit, FavoritState>(
+                builder: (context, state) {
+                  return (BlocProvider.of<FavoritCubit>(context)
+                          .favoritBreedsIds
+                          .contains(cat.image!.id))
+                      ? FavoritButton(
+                          color: Colors.red,
+                          onPressed: () {
+                            BlocProvider.of<FavoritCubit>(context)
+                                .favoritBreedsIds
+                                .remove(cat.image!.id);
+                          })
+                      : FavoritButton(
+                          color: Colors.grey,
+                          onPressed: () {
+                            BlocProvider.of<FavoritCubit>(context)
+                                .addItemToFavoritList(cat.image!.id);
+                          });
+                },
+              )
             ],
           ),
           Padding(

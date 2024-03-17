@@ -16,15 +16,11 @@ final class FavoritItemLoaded extends FavoritState {
 }
 
 final class FavoritItemAdded extends FavoritState {
-  final String addedMessage;
-
-  const FavoritItemAdded({required this.addedMessage});
+  const FavoritItemAdded();
 }
 
 final class FavoritItemDeleted extends FavoritState {
-  final String deletedMessage;
-
-  const FavoritItemDeleted({required this.deletedMessage});
+  const FavoritItemDeleted();
 }
 
 final class FavoritItemLoading extends FavoritState {}

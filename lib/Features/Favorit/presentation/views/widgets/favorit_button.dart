@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class FavoritButton extends StatelessWidget {
-  final void Function()? onPressed;
-  const FavoritButton({super.key, required this.onPressed});
+  final void Function() onPressed;
+  final Color color;
+  const FavoritButton(
+      {super.key, required this.onPressed, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +16,12 @@ class FavoritButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(16)),
       child: Center(
         child: IconButton(
-            onPressed: onPressed,
-            icon: const Icon(
-              Icons.favorite,
-              color: Colors.grey,
-            )),
+          onPressed: onPressed,
+          icon: Icon(
+            Icons.favorite,
+            color: color,
+          ),
+        ),
       ),
     );
   }

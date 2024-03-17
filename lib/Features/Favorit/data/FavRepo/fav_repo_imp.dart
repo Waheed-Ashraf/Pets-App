@@ -8,7 +8,6 @@ import 'package:pets_app/Features/Favorit/data/Models/favorit_models.dart';
 
 class FavRepoImp implements FavRepo {
   final ApiService _apiService;
-  final List<int> favoritItemIds = [];
 
   FavRepoImp(this._apiService);
   @override
@@ -67,9 +66,6 @@ class FavRepoImp implements FavRepo {
       }
     }
   }
-
-  @override
-  List<int> favoritItemsIds() {
-    return favoritItemIds;
-  }
 }
+
+final List<int> favoritItemIds = [];
