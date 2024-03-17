@@ -1,7 +1,9 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pets_app/Features/Cats/data/Models/CatsModels/cats_model.dart';
 import 'package:pets_app/Features/Cats/presentation/views/widgets/cat_characteristics_list.dart';
+import 'package:pets_app/Features/Favorit/presentation/controller/FavCubit/favorit_cubit.dart';
 import 'package:pets_app/Features/Favorit/presentation/views/widgets/favorit_button.dart';
 import 'package:pets_app/core/utils/app_styles.dart';
 import 'package:pets_app/core/utils/colors.dart';
@@ -20,6 +22,19 @@ class CatInformation extends StatelessWidget {
     return FadeInUp(
       child: Column(
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                cat.name,
+                style: AppStyles.styleSemiBold24.copyWith(color: primaryColor),
+              ),
+              FavoritButton(onPressed: () {
+                BlocProvider.of<FavoritCubit>(context)
+                    .addItemToFavoritList(cat.image!.id);
+              }),
+            ],
+          ),
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
             child: Column(
@@ -33,7 +48,9 @@ class CatInformation extends StatelessWidget {
                       style: AppStyles.styleSemiBold24
                           .copyWith(color: primaryColor),
                     ),
-                    const FavoritButton(),
+                    FavoritButton(
+                      onPressed: () {},
+                    ),
                   ],
                 ),
                 Padding(

@@ -6,6 +6,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pets_app/Core/widgets/custom_error_widget.dart';
 import 'package:pets_app/Core/widgets/custom_loading_indicator.dart';
+import 'package:pets_app/Core/widgets/snack_bar.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/FavCubit/favorit_cubit.dart';
 
 class FavoritList extends StatelessWidget {
@@ -28,30 +29,46 @@ class FavoritList extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return (state.favList[index].image) == null
                     ? Container()
-                    : Card(
-                        elevation: 6,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16.0),
+                    : Dismissible(
+                        key: Key(state.favList[index].id.toString()),
+                        background: const Center(
+                          child: Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          ),
                         ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: CachedNetworkImage(
-                            imageUrl: state.favList[index].image!.url,
-                            fit: BoxFit.cover,
-                            placeholder: (BuildContext context, String url) =>
-                                SizedBox(
-                              // color: Colors.white,
-                              height: 100,
+                        onDismissed: (direction) {
+                          showSnackBar(context,
+                              color: Colors.red, message: 'Product deleted');
+                          BlocProvider.of<FavoritCubit>(context)
+                              .deletItemFromFavoritList(
+                                  state.favList[index].id);
+                        },
+                        child: Card(
+                          elevation: 6,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: CachedNetworkImage(
+                              imageUrl: state.favList[index].image!.url,
+                              fit: BoxFit.cover,
+                              placeholder: (BuildContext context, String url) =>
+                                  SizedBox(
+                                // color: Colors.white,
+                                height: 100,
 
-                              child: Center(
-                                child: Lottie.asset(
-                                    'assets/images/image-placeholder.json',
-                                    width: 40,
-                                    fit: BoxFit.contain),
+                                child: Center(
+                                  child: Lottie.asset(
+                                      'assets/images/image-placeholder.json',
+                                      width: 40,
+                                      fit: BoxFit.contain),
+                                ),
                               ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
                             ),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
                           ),
                         ),
                       );

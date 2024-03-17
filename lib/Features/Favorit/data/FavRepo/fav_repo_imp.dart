@@ -8,10 +8,11 @@ import 'package:pets_app/Features/Favorit/data/Models/favorit_models.dart';
 
 class FavRepoImp implements FavRepo {
   final ApiService _apiService;
+  final List<int> favoritItemIds = [];
 
   FavRepoImp(this._apiService);
   @override
-  Future<Either<Failure, String>> addToFavoritList(
+  Future<Either<Failure, List<int>>> addToFavoritList(
       {required String breedsId}) async {
     try {
       var fevItem = await _apiService.post(
@@ -20,8 +21,8 @@ class FavRepoImp implements FavRepo {
             'image_id': breedsId,
           },
           apiKey: ApiConstance.apiKey);
-
-      return fevItem['message'];
+      favoritItemIds.add(fevItem['id']);
+      return right(favoritItemIds);
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioError(e));
@@ -33,12 +34,12 @@ class FavRepoImp implements FavRepo {
 
   @override
   Future<Either<Failure, String>> deleteFromFavoritList(
-      {required String favItemId}) async {
+      {required int favItemId}) async {
     try {
       var fevItem = await _apiService.delete(
           endPoint: ApiConstance.deletCatItmeEndPoint(favItemId: favItemId),
           apiKey: ApiConstance.apiKey);
-      return fevItem['message'];
+      return right(fevItem['message']);
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioError(e));
@@ -65,5 +66,10 @@ class FavRepoImp implements FavRepo {
         return left(ServerFailure(e.toString()));
       }
     }
+  }
+
+  @override
+  List<int> favoritItemsIds() {
+    return favoritItemIds;
   }
 }

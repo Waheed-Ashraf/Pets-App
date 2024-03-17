@@ -40,81 +40,78 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<FavoritCubit>()..fetchFavoritList(),
-      child: Scaffold(
-        extendBody: true,
-        bottomNavigationBar: Theme(
-          data: ThemeData(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-          ),
-          child: BottomAppBar(
-            padding: EdgeInsets.zero,
-            height: kBottomNavigationBarHeight * 1.2,
-            color: Theme.of(context).colorScheme.primary,
-            shape: const CircularNotchedRectangle(),
-            notchMargin: 0.8,
+    return Scaffold(
+      extendBody: true,
+      bottomNavigationBar: Theme(
+        data: ThemeData(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+        ),
+        child: BottomAppBar(
+          padding: EdgeInsets.zero,
+          height: kBottomNavigationBarHeight * 1.2,
+          color: Theme.of(context).colorScheme.primary,
+          shape: const CircularNotchedRectangle(),
+          notchMargin: 0.8,
 
-            //  clipBehavior: Clip.antiAlias,
-            child: BottomNavigationBar(
-              onTap: _selectPage,
-              type: BottomNavigationBarType.fixed,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              unselectedItemColor: Colors.blue[50],
-              selectedItemColor: Colors.white,
-              currentIndex: _selectedPageIndex,
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.favorite),
-                  label: 'Favorit',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(FontAwesomeIcons.dog),
-                  label: 'Dogs',
-                ),
-                BottomNavigationBarItem(
-                  activeIcon: null,
-                  icon: Icon(null),
-                  label: "Explore",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    FontAwesomeIcons.cat,
-                  ),
-                  label: 'Cats',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
-                  label: 'Profile',
-                ),
-              ],
-            ),
-          ),
-        ),
-        floatingActionButtonLocation:
-            FloatingActionButtonLocation.miniCenterDocked,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: FloatingActionButton(
-            hoverElevation: 0,
+          //  clipBehavior: Clip.antiAlias,
+          child: BottomNavigationBar(
+            onTap: _selectPage,
+            type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.transparent,
-            // splashColor: Colors.transparent,
-            // tooltip: 'Explore',
             elevation: 0,
-            child: Icon(
-              FontAwesomeIcons.paw,
-              size: 40,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            onPressed: () => setState(() {
-              _selectedPageIndex = 2;
-            }),
+            unselectedItemColor: Colors.blue[50],
+            selectedItemColor: Colors.white,
+            currentIndex: _selectedPageIndex,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.favorite),
+                label: 'Favorit',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(FontAwesomeIcons.dog),
+                label: 'Dogs',
+              ),
+              BottomNavigationBarItem(
+                activeIcon: null,
+                icon: Icon(null),
+                label: "Explore",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  FontAwesomeIcons.cat,
+                ),
+                label: 'Cats',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'Profile',
+              ),
+            ],
           ),
         ),
-        body: _pages[_selectedPageIndex],
       ),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: FloatingActionButton(
+          hoverElevation: 0,
+          backgroundColor: Colors.transparent,
+          // splashColor: Colors.transparent,
+          // tooltip: 'Explore',
+          elevation: 0,
+          child: Icon(
+            FontAwesomeIcons.paw,
+            size: 40,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          onPressed: () => setState(() {
+            _selectedPageIndex = 2;
+          }),
+        ),
+      ),
+      body: _pages[_selectedPageIndex],
     );
   }
 }
