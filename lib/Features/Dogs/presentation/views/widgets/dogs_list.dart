@@ -8,6 +8,7 @@ import 'package:pets_app/Core/utils/app_styles.dart';
 import 'package:pets_app/Core/widgets/custom_error_widget.dart';
 import 'package:pets_app/Core/widgets/custom_loading_indicator.dart';
 import 'package:pets_app/Features/Dogs/presentation/controller/DogsViewCubit/dogs_view_cubit.dart';
+import 'package:pets_app/Features/Dogs/presentation/views/widgets/dogs_details_view.dart';
 
 class DogsList extends StatelessWidget {
   const DogsList({super.key});
@@ -28,32 +29,43 @@ class DogsList extends StatelessWidget {
               return (state.dogsBreedsList[index].image) == null
                   ? Container()
                   : FadeInUp(
-                      child: Card(
-                          elevation: 6,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: CachedNetworkImage(
-                              imageUrl: state.dogsBreedsList[index].image!.url,
-                              fit: BoxFit.cover,
-                              placeholder: (BuildContext context, String url) =>
-                                  SizedBox(
-                                height:
-                                    state.dogsBreedsList[index].image!.height *
-                                        .12,
-                                child: Center(
-                                  child: Lottie.asset(
-                                      'assets/images/image-placeholder.json',
-                                      width: 40,
-                                      fit: BoxFit.contain),
-                                ),
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return DogsDetailsView(
+                                dog: state.dogsBreedsList[index]);
+                          }));
+                        },
+                        child: Card(
+                            elevation: 6,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16.0),
                             ),
-                          )),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: CachedNetworkImage(
+                                imageUrl:
+                                    state.dogsBreedsList[index].image!.url,
+                                fit: BoxFit.cover,
+                                placeholder:
+                                    (BuildContext context, String url) =>
+                                        SizedBox(
+                                  height: state
+                                          .dogsBreedsList[index].image!.height *
+                                      .12,
+                                  child: Center(
+                                    child: Lottie.asset(
+                                        'assets/images/image-placeholder.json',
+                                        width: 40,
+                                        fit: BoxFit.contain),
+                                  ),
+                                ),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                              ),
+                            )),
+                      ),
                     );
             },
           );
