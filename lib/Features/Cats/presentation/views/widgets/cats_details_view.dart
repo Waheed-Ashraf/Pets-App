@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pets_app/Features/Cats/presentation/views/widgets/cat_information.dart';
 import 'package:pets_app/Features/Cats/data/Models/CatsModels/cats_model.dart';
-import 'package:pets_app/Features/Favorit/data/Models/favorit_models.dart';
 import 'package:pets_app/core/utils/colors.dart';
 
 class CatsDetailsView extends StatelessWidget {

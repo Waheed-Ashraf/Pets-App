@@ -14,11 +14,9 @@ class CatInformation extends StatelessWidget {
   const CatInformation({
     super.key,
     required this.cat,
-    this.favoritModel,
   });
 
   final CatModel cat;
-  final FavoritModel? favoritModel;
 
   @override
   Widget build(BuildContext context) {
@@ -59,19 +57,6 @@ class CatInformation extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      cat.name,
-                      style: AppStyles.styleSemiBold24
-                          .copyWith(color: primaryColor),
-                    ),
-                    FavoritButton(
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10, bottom: 8),
                   child: Table(

@@ -36,8 +36,7 @@ class FavRepoImp implements FavRepo {
       {required int favItemId}) async {
     try {
       var fevItem = await _apiService.delete(
-          endPoint: ApiConstance.deletCatItmeEndPoint(
-              favItemId: favItemId.toString()),
+          endPoint: ApiConstance.deletCatItmeEndPoint(favItemId: favItemId),
           apiKey: ApiConstance.apiKey);
       return right(fevItem['message']);
     } catch (e) {
