@@ -26,9 +26,9 @@ class ApiConstance {
   static const String dogsFavEndPoin =
       "https://api.thedogapi.com/v1/favourites";
 
-  static String deletCatItmeEndPoint({required String favItemId}) =>
+  static String deletCatItmeEndPoint({required int favItemId}) =>
       "https://api.thecatapi.com/v1/favourites/$favItemId";
 
-  static String deletDogItmeEndPoint({required String favItemId}) =>
+  static String deletDogItmeEndPoint({required int favItemId}) =>
       "https://api.thecatapi.com/v1/favourites/$favItemId";
 }
