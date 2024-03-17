@@ -50,10 +50,10 @@ class DogInformation extends StatelessWidget {
                 children: [
                   TableRow(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TableCell(
-                          child: Center(
+                      TableCell(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
                               'Weight',
                               style: AppStyles.styleSemiBold16
@@ -62,10 +62,10 @@ class DogInformation extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TableCell(
-                          child: Center(
+                      TableCell(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
                               {dog.weight.imperial!}.isEmpty
                                   ? 'Not Specified'
@@ -80,10 +80,10 @@ class DogInformation extends StatelessWidget {
                   ),
                   TableRow(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TableCell(
-                          child: Center(
+                      TableCell(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
                               'Height',
                               style: AppStyles.styleSemiBold16
@@ -92,10 +92,10 @@ class DogInformation extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TableCell(
-                          child: Center(
+                      TableCell(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
                               {dog.height.imperial}.isEmpty
                                   ? 'Not Specified'
@@ -110,10 +110,10 @@ class DogInformation extends StatelessWidget {
                   ),
                   TableRow(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TableCell(
-                          child: Center(
+                      TableCell(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
                               'Breed Group',
                               style: AppStyles.styleSemiBold16
@@ -122,10 +122,10 @@ class DogInformation extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TableCell(
-                          child: Center(
+                      TableCell(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
                               {dog.breedGroup}.isEmpty
                                   ? 'Not Specified'
@@ -140,10 +140,10 @@ class DogInformation extends StatelessWidget {
                   ),
                   TableRow(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TableCell(
-                          child: Center(
+                      TableCell(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
                               'Breed For',
                               style: AppStyles.styleSemiBold16
@@ -152,10 +152,10 @@ class DogInformation extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TableCell(
-                          child: Center(
+                      TableCell(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
                               {dog.bredFor}.isEmpty
                                   ? 'Not Specified'
@@ -170,10 +170,10 @@ class DogInformation extends StatelessWidget {
                   ),
                   TableRow(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TableCell(
-                          child: Center(
+                      TableCell(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
                               'Origin',
                               style: AppStyles.styleSemiBold16
@@ -182,10 +182,10 @@ class DogInformation extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TableCell(
-                          child: Center(
+                      TableCell(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
                               dog.origin.isEmpty ? 'Not Specified' : dog.origin,
                               style: AppStyles.styleMedium16
@@ -198,10 +198,10 @@ class DogInformation extends StatelessWidget {
                   ),
                   TableRow(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TableCell(
-                          child: Center(
+                      TableCell(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
                               'Life Span',
                               style: AppStyles.styleSemiBold16
@@ -210,10 +210,10 @@ class DogInformation extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TableCell(
-                          child: Center(
+                      TableCell(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
                               {dog.lifeSpan}.isEmpty
                                   ? 'Not Specified'
@@ -228,10 +228,10 @@ class DogInformation extends StatelessWidget {
                   ),
                   TableRow(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TableCell(
-                          child: Center(
+                      TableCell(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
                               'Temperament',
                               style: AppStyles.styleSemiBold16
@@ -240,10 +240,10 @@ class DogInformation extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TableCell(
-                          child: Center(
+                      TableCell(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
                               {dog.temperament}.isEmpty
                                   ? 'Not Specified'

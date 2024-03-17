@@ -48,9 +48,7 @@ class CatsDetailsView extends StatelessWidget {
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             sliver: SliverToBoxAdapter(
-              child: CatInformation(
-                cat: cat,
-              ),
+              child: CatInformation(cat: cat),
             ),
           ),
         ],
