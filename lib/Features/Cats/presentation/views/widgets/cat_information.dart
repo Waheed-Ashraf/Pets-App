@@ -7,6 +7,7 @@ import 'package:pets_app/Features/Favorit/presentation/controller/FavCubit/favor
 import 'package:pets_app/Features/Favorit/presentation/views/widgets/favorit_button.dart';
 import 'package:pets_app/core/utils/app_styles.dart';
 import 'package:pets_app/core/utils/colors.dart';
+import 'package:pets_app/core/utils/functions/launch_url.dart';
 import 'package:pets_app/core/widgets/custom_button.dart';
 
 class CatInformation extends StatelessWidget {
@@ -179,7 +180,7 @@ class CatInformation extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -200,7 +201,10 @@ class CatInformation extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 90, right: 90),
                     child: CustomButton(
                       text: 'Read more...',
-                      onPressed: () {},
+                      onPressed: () {
+                        launchCustomUrl(
+                            context: context, url: cat.wikipediaUrl);
+                      },
                     )),
               ],
             ),
