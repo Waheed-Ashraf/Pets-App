@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pets_app/Core/utils/service_locator.dart';
 import 'package:pets_app/Features/Cats/presentation/views/cats_view.dart';
 import 'package:pets_app/Features/Dogs/presentation/views/dogs_view.dart';
 import 'package:pets_app/Features/Explore/presentation/views/explore_view.dart';
-import 'package:pets_app/Features/Favorit/presentation/controller/FavCubit/favorit_cubit.dart';
 import 'package:pets_app/Features/Favorit/presentation/views/favorit_view.dart';
 import 'package:pets_app/Features/Profile/presentation/views/Profile_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
