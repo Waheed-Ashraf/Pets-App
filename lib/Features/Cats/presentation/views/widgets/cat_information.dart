@@ -15,11 +15,13 @@ class CatInformation extends StatelessWidget {
     super.key,
     required this.cat,
   });
-
   final CatModel cat;
 
   @override
   Widget build(BuildContext context) {
+    print(BlocProvider.of<FavoritCubit>(context).favoritBreedsIds);
+    print(BlocProvider.of<FavoritCubit>(context).favoritItemsIds);
+
     return FadeInUp(
       child: Column(
         children: [
@@ -30,26 +32,7 @@ class CatInformation extends StatelessWidget {
                 cat.name,
                 style: AppStyles.styleSemiBold24.copyWith(color: primaryColor),
               ),
-              BlocBuilder<FavoritCubit, FavoritState>(
-                builder: (context, state) {
-                  return (BlocProvider.of<FavoritCubit>(context)
-                          .favoritBreedsIds
-                          .contains(cat.image!.id))
-                      ? FavoritButton(
-                          color: Colors.red,
-                          onPressed: () {
-                            BlocProvider.of<FavoritCubit>(context)
-                                .favoritBreedsIds
-                                .remove(cat.image!.id);
-                          })
-                      : FavoritButton(
-                          color: Colors.grey,
-                          onPressed: () {
-                            BlocProvider.of<FavoritCubit>(context)
-                                .addItemToFavoritList(cat.image!.id);
-                          });
-                },
-              )
+              FavoritButton(cat: cat),
             ],
           ),
           Padding(

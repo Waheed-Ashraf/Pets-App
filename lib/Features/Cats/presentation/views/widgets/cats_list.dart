@@ -10,6 +10,7 @@ import 'package:pets_app/Core/widgets/custom_loading_indicator.dart';
 import 'package:pets_app/Features/Cats/presentation/controller/CatsBreedsCubit/cats_breeds_cubit.dart';
 import 'package:pets_app/Features/Cats/presentation/views/widgets/cats_details_view.dart';
 import 'package:pets_app/Features/Favorit/data/FavRepo/fav_repo_imp.dart';
+import 'package:pets_app/Features/Favorit/presentation/controller/FavCubit/favorit_cubit.dart';
 
 class CatsList extends StatelessWidget {
   const CatsList({super.key});

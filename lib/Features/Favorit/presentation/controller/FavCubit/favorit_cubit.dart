@@ -9,6 +9,7 @@ class FavoritCubit extends Cubit<FavoritState> {
   final FavRepo _favRepo;
   FavoritCubit(this._favRepo) : super(FavoritInitial());
   Set<String> favoritBreedsIds = {};
+  Set<int> favoritItemsIds = {};
   Future fetchFavoritList() async {
     emit(FavoritItemLoading());
     var data = await _favRepo.fetchAllFivoritsList();
@@ -17,20 +18,23 @@ class FavoritCubit extends Cubit<FavoritState> {
   }
 
   Future addItemToFavoritList(String breedsId) async {
-    var data = await _favRepo.addToFavoritList(breedsId: breedsId);
+    await _favRepo.addToFavoritList(breedsId: breedsId);
     favoritBreedsIds.add(breedsId);
 
-    data.fold((l) => emit(FavoritError(l.errMessage)),
-        (r) => emit(const FavoritItemAdded()));
+    // data.fold((l) => emit(FavoritError(l.errMessage)), (r) {
+    //   favoritItemsIds.add(r);
+    //   emit(const FavoritItemAdded());
+    // });
   }
 
   Future deletItemFromFavoritList(int favItemId) async {
+    favoritItemsIds.remove(favItemId);
     await _favRepo.deleteFromFavoritList(favItemId: favItemId);
   }
 
   // Future addOrDeletItemFromFavoritList(
   //     {int? favItemId, String? breedsId}) async {
-  //   if (_favRepo.favoritItemsIds().contains(favItemId)) {
+  //   if (favoritItemsIds.contains(favItemId)) {
   //     await _favRepo.deleteFromFavoritList(favItemId: favItemId!);
   //   } else {
   //     await _favRepo.addToFavoritList(breedsId: breedsId!);
