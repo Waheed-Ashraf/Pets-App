@@ -15,35 +15,31 @@ class CatInformation extends StatelessWidget {
     super.key,
     required this.cat,
   });
-
   final CatModel cat;
 
   @override
   Widget build(BuildContext context) {
+    print(BlocProvider.of<FavoritCubit>(context).favoritBreedsIds);
+    print(BlocProvider.of<FavoritCubit>(context).favoritItemsIds);
+
     return FadeInUp(
       child: Column(
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                cat.name,
+                style: AppStyles.styleSemiBold24.copyWith(color: primaryColor),
+              ),
+              FavoritButton(cat: cat),
+            ],
+          ),
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      cat.name,
-                      style: AppStyles.styleSemiBold24
-                          .copyWith(color: primaryColor),
-                    ),
-                    FavoritButton(
-                      onPressed: () {
-                        BlocProvider.of<FavoritCubit>(context)
-                            .addItemToFavoritList(cat.image!.id);
-                      },
-                    ),
-                  ],
-                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10, bottom: 8),
                   child: Table(

@@ -6,8 +6,10 @@ import 'package:pets_app/Features/Cats/data/Models/CatsModels/cats_model.dart';
 import 'package:pets_app/core/utils/colors.dart';
 
 class CatsDetailsView extends StatelessWidget {
-  const CatsDetailsView({super.key, required this.cat});
-
+  const CatsDetailsView({
+    super.key,
+    required this.cat,
+  });
   final CatModel cat;
 
   @override
@@ -41,8 +43,13 @@ class CatsDetailsView extends StatelessWidget {
             floating: false,
             snap: false,
           ),
-          SliverToBoxAdapter(
-            child: CatInformation(cat: cat),
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            sliver: SliverToBoxAdapter(
+              child: CatInformation(
+                cat: cat,
+              ),
+            ),
           ),
         ],
       ),

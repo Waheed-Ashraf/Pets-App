@@ -38,8 +38,12 @@ class FavoritList extends StatelessWidget {
                           ),
                         ),
                         onDismissed: (direction) {
+                          BlocProvider.of<FavoritCubit>(context)
+                              .favoritBreedsIds
+                              .remove(state.favList[index].image!.id);
+
                           showSnackBar(context,
-                              color: Colors.red, message: 'Product deleted');
+                              color: Colors.red, message: 'Pet deleted');
                           BlocProvider.of<FavoritCubit>(context)
                               .deletItemFromFavoritList(
                                   state.favList[index].id);
