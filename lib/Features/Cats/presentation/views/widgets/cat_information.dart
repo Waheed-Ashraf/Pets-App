@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pets_app/Features/Cats/data/Models/CatsModels/cats_model.dart';
 import 'package:pets_app/Features/Cats/presentation/views/widgets/cat_characteristics_list.dart';
-import 'package:pets_app/Features/Favorit/data/Models/favorit_models.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/FavCubit/favorit_cubit.dart';
 import 'package:pets_app/Features/Favorit/presentation/views/widgets/favorit_button.dart';
 import 'package:pets_app/core/utils/app_styles.dart';
@@ -19,7 +18,7 @@ class CatInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(BlocProvider.of<FavoritCubit>(context).favoritBreedsIds);
+    print(favoritBreedsIds);
     print(BlocProvider.of<FavoritCubit>(context).favoritItemsIds);
 
     return FadeInUp(

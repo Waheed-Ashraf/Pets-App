@@ -27,58 +27,55 @@ class FavoritList extends StatelessWidget {
               gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: crossAxisCount),
               itemBuilder: (BuildContext context, int index) {
-                return (state.favList[index].image) == null
-                    ? Container()
-                    : Dismissible(
-                        key: Key(state.favList[index].id.toString()),
-                        background: const Center(
-                          child: Icon(
-                            Icons.delete,
-                            color: Colors.red,
+                return Dismissible(
+                  key: Key(state.favList[index].id.toString()),
+                  background: const Center(
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ),
+                  ),
+                  onDismissed: (direction) {
+                    favoritBreedsIds.remove(state.favList[index].image!.id);
+
+                    showSnackBar(context,
+                        color: Colors.red, message: 'Pet deleted');
+                    BlocProvider.of<FavoritCubit>(context)
+                        .deletItemFromFavoritList(state.favList[index].id);
+                  },
+                  child: Card(
+                    elevation: 6,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: CachedNetworkImage(
+                        imageUrl: state.favList[index].image!.url,
+                        fit: BoxFit.cover,
+                        placeholder: (BuildContext context, String url) =>
+                            SizedBox(
+                          // color: Colors.white,
+                          height: 100,
+
+                          child: Center(
+                            child: Lottie.asset(
+                                'assets/images/image-placeholder.json',
+                                width: 40,
+                                fit: BoxFit.contain),
                           ),
                         ),
-                        onDismissed: (direction) {
-                          BlocProvider.of<FavoritCubit>(context)
-                              .favoritBreedsIds
-                              .remove(state.favList[index].image!.id);
-
-                          showSnackBar(context,
-                              color: Colors.red, message: 'Pet deleted');
-                          BlocProvider.of<FavoritCubit>(context)
-                              .deletItemFromFavoritList(
-                                  state.favList[index].id);
-                        },
-                        child: Card(
-                          elevation: 6,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: CachedNetworkImage(
-                              imageUrl: state.favList[index].image!.url,
-                              fit: BoxFit.cover,
-                              placeholder: (BuildContext context, String url) =>
-                                  SizedBox(
-                                // color: Colors.white,
-                                height: 100,
-
-                                child: Center(
-                                  child: Lottie.asset(
-                                      'assets/images/image-placeholder.json',
-                                      width: 40,
-                                      fit: BoxFit.contain),
-                                ),
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                            ),
-                          ),
-                        ),
-                      );
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      ),
+                    ),
+                  ),
+                );
               },
             ),
           );
+        } else if (state is FavoritListEmpty) {
+          return const Center();
         } else if (state is FavoritError) {
           return CustomErrorWidget(errMessage: state.errorMessage);
         } else {

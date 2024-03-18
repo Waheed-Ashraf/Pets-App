@@ -6,14 +6,14 @@ void showSnackBar(BuildContext context,
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       behavior: SnackBarBehavior.floating,
-      duration: const Duration(seconds: 2),
-      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+      duration: const Duration(milliseconds: 500),
+      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25))),
       content: Center(
         child: Text(
           message,
-          style: AppStyles.styleMedium18.copyWith(color: Colors.white),
+          style: AppStyles.styleMedium14.copyWith(color: Colors.white),
         ),
       ),
       backgroundColor: color,

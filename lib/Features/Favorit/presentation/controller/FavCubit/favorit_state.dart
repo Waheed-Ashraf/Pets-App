@@ -15,6 +15,10 @@ final class FavoritItemLoaded extends FavoritState {
   const FavoritItemLoaded({required this.favList});
 }
 
+final class FavoritListEmpty extends FavoritState {
+  const FavoritListEmpty();
+}
+
 final class FavoritItemAdded extends FavoritState {
   const FavoritItemAdded();
 }

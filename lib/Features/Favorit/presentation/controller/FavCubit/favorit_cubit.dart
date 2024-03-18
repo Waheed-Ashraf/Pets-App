@@ -8,23 +8,29 @@ part 'favorit_state.dart';
 class FavoritCubit extends Cubit<FavoritState> {
   final FavRepo _favRepo;
   FavoritCubit(this._favRepo) : super(FavoritInitial());
-  Set<String> favoritBreedsIds = {};
   Set<int> favoritItemsIds = {};
+
   Future fetchFavoritList() async {
     emit(FavoritItemLoading());
     var data = await _favRepo.fetchAllFivoritsList();
-    data.fold((l) => emit(FavoritError(l.errMessage)),
-        (r) => emit(FavoritItemLoaded(favList: r)));
+    data.fold((l) => emit(FavoritError(l.errMessage)), (r) {
+      if (r.isEmpty) {
+        emit(const FavoritListEmpty());
+      } else {
+        emit(FavoritItemLoaded(favList: r));
+      }
+    });
   }
 
   Future addItemToFavoritList(String breedsId) async {
-    await _favRepo.addToFavoritList(breedsId: breedsId);
-    favoritBreedsIds.add(breedsId);
+    var data = await _favRepo.addToFavoritList(breedsId: breedsId);
 
-    // data.fold((l) => emit(FavoritError(l.errMessage)), (r) {
-    //   favoritItemsIds.add(r);
-    //   emit(const FavoritItemAdded());
-    // });
+    data.fold((l) => emit(FavoritError(l.errMessage)), (r) {
+      favoritItemsIds.add(r);
+      favoritBreedsIds.add(breedsId);
+
+      emit(const FavoritItemAdded());
+    });
   }
 
   Future deletItemFromFavoritList(int favItemId) async {
@@ -41,3 +47,5 @@ class FavoritCubit extends Cubit<FavoritState> {
   //   }
   // }
 }
+
+Set<String> favoritBreedsIds = {};
