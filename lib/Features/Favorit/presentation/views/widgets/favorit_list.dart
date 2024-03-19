@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:lottie/lottie.dart';
+import 'package:pets_app/Core/utils/app_styles.dart';
 import 'package:pets_app/Core/widgets/custom_error_widget.dart';
 import 'package:pets_app/Core/widgets/custom_loading_indicator.dart';
 import 'package:pets_app/Core/widgets/snack_bar.dart';
@@ -22,7 +23,7 @@ class FavoritList extends StatelessWidget {
           return FadeInUp(
             child: MasonryGridView.builder(
               shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               itemCount: state.favList.length,
               gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: crossAxisCount),
@@ -75,7 +76,25 @@ class FavoritList extends StatelessWidget {
             ),
           );
         } else if (state is FavoritListEmpty) {
-          return const Center();
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Lottie.asset(
+                  'assets/images/search.json',
+                  width: MediaQuery.of(context).size.width * .7,
+                  fit: BoxFit.contain,
+                ),
+                Text(
+                  'There is no Favorit pictures, Try add some',
+                  textAlign: TextAlign.center,
+                  style: AppStyles.styleBold16.copyWith(
+                      color: Theme.of(context).colorScheme.inversePrimary),
+                ),
+              ],
+            ),
+          );
         } else if (state is FavoritError) {
           return CustomErrorWidget(errMessage: state.errorMessage);
         } else {
