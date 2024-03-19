@@ -179,32 +179,14 @@ class CatInformation extends StatelessWidget {
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Divider(
-                  color: primaryColor,
-                  thickness: 2,
-                  height: 35,
-                ),
-                Text(
-                  'Read more on wikipedia:',
-                  style:
-                      AppStyles.styleSemiBold18.copyWith(color: primaryColor),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                GradientButton(
-                  text: 'Read More',
-                  onPressed: () {
-                    _launchURL(cat.wikipediaUrl);
-                  },
-                ),
-              ],
-            ),
+          const SizedBox(
+            height: 16,
+          ),
+          GradientButton(
+            text: 'Read More',
+            onPressed: () {
+              _launchURL(cat.wikipediaUrl);
+            },
           ),
         ],
       ),
