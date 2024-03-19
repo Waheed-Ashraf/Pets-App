@@ -1,14 +1,14 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pets_app/Core/widgets/grediant_button.dart';
 import 'package:pets_app/Features/Cats/data/Models/CatsModels/cats_model.dart';
 import 'package:pets_app/Features/Cats/presentation/views/widgets/cat_characteristics_list.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/FavCubit/favorit_cubit.dart';
 import 'package:pets_app/Features/Favorit/presentation/views/widgets/favorit_button.dart';
 import 'package:pets_app/core/utils/app_styles.dart';
 import 'package:pets_app/core/utils/colors.dart';
-import 'package:pets_app/core/utils/functions/launch_url.dart';
-import 'package:pets_app/core/widgets/custom_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CatInformation extends StatelessWidget {
   const CatInformation({
@@ -197,20 +197,25 @@ class CatInformation extends StatelessWidget {
                 const SizedBox(
                   height: 8,
                 ),
-                Padding(
-                    padding: const EdgeInsets.only(left: 90, right: 90),
-                    child: CustomButton(
-                      text: 'Read more...',
-                      onPressed: () {
-                        launchCustomUrl(
-                            context: context, url: cat.wikipediaUrl);
-                      },
-                    )),
+                GradientButton(
+                  text: 'Read More',
+                  onPressed: () {
+                    _launchURL(cat.wikipediaUrl);
+                  },
+                ),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

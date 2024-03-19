@@ -5,9 +5,8 @@ import 'package:pets_app/Features/Favorit/presentation/controller/FavCubit/favor
 
 class FavoritButton extends StatefulWidget {
   final CatModel cat;
-  Color? color;
 
-  FavoritButton({
+  const FavoritButton({
     super.key,
     required this.cat,
   });
@@ -17,6 +16,8 @@ class FavoritButton extends StatefulWidget {
 }
 
 class _FavoritButtonState extends State<FavoritButton> {
+  Color color = Colors.grey;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,45 +32,19 @@ class _FavoritButtonState extends State<FavoritButton> {
           Icons.favorite,
           color: (favoritBreedsIds.contains(widget.cat.image!.id))
               ? Colors.red
-              : widget.color,
+              : color,
         ),
         onPressed: () {
           if (favoritBreedsIds.contains(widget.cat.image!.id)) {
           } else {
             setState(() {
-              widget.color = Colors.red;
+              color = Colors.red;
             });
             BlocProvider.of<FavoritCubit>(context)
                 .addItemToFavoritList(widget.cat.image!.id);
           }
         },
-      )
-
-          // ? IconButton(
-          //     icon: const Icon(
-          //       Icons.favorite,
-          //       color: Colors.red,
-          //     ),
-          //     onPressed: () {
-          //       // BlocProvider.of<FavoritCubit>(context)
-          //       //     .favoritBreedsIds
-          //       //     .remove(cat.image!.id);
-          //       // BlocProvider.of<FavoritCubit>(context)
-          //       //     .deletItemFromFavoritList(favItemId);
-          //     })
-          // : IconButton(
-          //     onPressed: () {
-          //       setState(() {
-          //         widget.color = Colors.red;
-          //       });
-          //       BlocProvider.of<FavoritCubit>(context)
-          //           .addItemToFavoritList(widget.cat.image!.id);
-          //     },
-          //     icon: Icon(
-          //       Icons.favorite,
-          //       color: widget.color,
-          //     )),
-          ),
+      )),
     );
   }
 }
