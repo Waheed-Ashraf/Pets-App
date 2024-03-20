@@ -8,7 +8,7 @@ import 'package:pets_app/Features/Favorit/presentation/controller/FavCubit/favor
 import 'package:pets_app/Features/Favorit/presentation/views/widgets/favorit_button.dart';
 import 'package:pets_app/core/utils/app_styles.dart';
 import 'package:pets_app/core/utils/colors.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:pets_app/core/utils/functions/launch_url.dart';
 
 class CatInformation extends StatelessWidget {
   const CatInformation({
@@ -185,19 +185,11 @@ class CatInformation extends StatelessWidget {
           GradientButton(
             text: 'Read More',
             onPressed: () {
-              _launchURL(cat.wikipediaUrl);
+              launchCustomUrl(context: context, url: cat.wikipediaUrl);
             },
           ),
         ],
       ),
     );
-  }
-
-  void _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 }
