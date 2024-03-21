@@ -20,30 +20,41 @@ class CustomInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 20),
-      child: Column(
-        children: [
-          Text(
-            overflow: TextOverflow.ellipsis,
-            text,
-            style: AppStyles.styleSemiBold16.copyWith(color: primaryColor),
+      padding: const EdgeInsets.only(right: 1),
+      child: SizedBox(
+        width: 130,
+        child: Card(
+          color: Theme.of(context).colorScheme.secondary,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                    right: 10, left: 10, top: 10, bottom: 2),
+                child: Text(
+                  overflow: TextOverflow.ellipsis,
+                  text,
+                  style:
+                      AppStyles.styleRegular14.copyWith(color: secondaryColor),
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              CircularPercentIndicator(
+                radius: 30,
+                lineWidth: 8,
+                percent: percent,
+                center: Text(
+                  centerText,
+                  style: AppStyles.styleRegular16.copyWith(),
+                ),
+                animation: true,
+                progressColor: secondaryColor,
+                circularStrokeCap: CircularStrokeCap.round,
+              )
+            ],
           ),
-          const SizedBox(
-            height: 5,
-          ),
-          CircularPercentIndicator(
-            radius: 30,
-            lineWidth: 8,
-            percent: percent,
-            center: Text(
-              centerText,
-              style: AppStyles.styleRegular16.copyWith(),
-            ),
-            animation: true,
-            progressColor: secondaryColor,
-            circularStrokeCap: CircularStrokeCap.round,
-          )
-        ],
+        ),
       ),
     );
   }

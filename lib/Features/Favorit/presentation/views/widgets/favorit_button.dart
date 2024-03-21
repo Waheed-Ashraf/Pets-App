@@ -4,11 +4,11 @@ import 'package:pets_app/Features/Cats/data/Models/CatsModels/cats_model.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/FavCubit/favorit_cubit.dart';
 
 class FavoritButton extends StatefulWidget {
-  final CatModel cat;
+  final String imageId;
 
   const FavoritButton({
     super.key,
-    required this.cat,
+    required this.imageId,
   });
 
   @override
@@ -30,18 +30,17 @@ class _FavoritButtonState extends State<FavoritButton> {
           child: IconButton(
         icon: Icon(
           Icons.favorite,
-          color: (favoritBreedsIds.contains(widget.cat.image!.id))
-              ? Colors.red
-              : color,
+          color:
+              (favoritBreedsIds.contains(widget.imageId)) ? Colors.red : color,
         ),
         onPressed: () {
-          if (favoritBreedsIds.contains(widget.cat.image!.id)) {
+          if (favoritBreedsIds.contains(widget.imageId)) {
           } else {
             setState(() {
               color = Colors.red;
             });
             BlocProvider.of<FavoritCubit>(context)
-                .addItemToFavoritList(widget.cat.image!.id);
+                .addItemToFavoritList(widget.imageId);
           }
         },
       )),

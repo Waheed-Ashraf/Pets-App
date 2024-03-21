@@ -32,7 +32,7 @@ class CatInformation extends StatelessWidget {
                 cat.name,
                 style: AppStyles.styleSemiBold24.copyWith(color: primaryColor),
               ),
-              FavoritButton(cat: cat),
+              FavoritButton(imageId: cat.image!.id),
             ],
           ),
           Padding(
@@ -152,9 +152,9 @@ class CatInformation extends StatelessWidget {
                       AppStyles.styleMedium16.copyWith(color: secondaryColor),
                 ),
                 const Divider(
-                  color: primaryColor, // You can set the color of the divider
-                  thickness: 2, // You can set the thickness of the divider
-                  height: 35, // You can set the height of the divider
+                  color: primaryColor,
+                  thickness: 2,
+                  height: 35,
                 ),
               ],
             ),
@@ -174,7 +174,7 @@ class CatInformation extends StatelessWidget {
                 height: 10,
               ),
               SizedBox(
-                height: 90,
+                height: 112,
                 child: CatCharacteristicsList(cat: cat),
               ),
             ],
