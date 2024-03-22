@@ -44,14 +44,15 @@ dependencies:
   flutter_bloc: ^8.1.4
   flutter_staggered_grid_view: ^0.7.0
   font_awesome_flutter: ^10.7.0
+  gallery_saver: ^2.3.2
   get_it: ^7.6.7
-  google_fonts: ^6.2.0
+  google_fonts: ^4.0.4
   image_picker: ^1.0.7
-  lottie: ^3.1.0
+  lottie: ^3.0.0
   modal_progress_hud_nsn: ^0.5.1
   path: ^1.9.0
-  percent_indicator: ^4.2.3
   path_provider: ^2.1.2
+  percent_indicator: ^4.2.3
   shimmer: ^3.0.0
   url_launcher: ^6.2.5
 

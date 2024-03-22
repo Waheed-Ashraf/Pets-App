@@ -1,8 +1,7 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pets_app/Core/utils/app_styles.dart';
@@ -22,8 +21,8 @@ class ImageScreen extends StatelessWidget {
         title: const Text('Image'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _downloadImage(context, imageUrl);
+        onPressed: () async {
+          await _downloadImage(context, imageUrl);
         },
         child: const Icon(Icons.download),
       ),
@@ -45,7 +44,7 @@ class ImageScreen extends StatelessWidget {
                 ),
               ),
             ),
-            errorWidget: (context, url, error) => Icon(Icons.error),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
         ),
       ),
@@ -53,19 +52,11 @@ class ImageScreen extends StatelessWidget {
   }
 
   Future<void> _downloadImage(BuildContext context, String imageUrl) async {
+    final tempDir = await getTemporaryDirectory();
+    final path = '${tempDir.path}/myfile.jpg';
     try {
-      final dio = Dio();
-      final response = await dio.get(
-        imageUrl,
-        options: Options(responseType: ResponseType.bytes),
-      );
-
-      final appDir = await getApplicationDocumentsDirectory();
-      final filename = imageUrl.split('/').last;
-      final File imageFile = File('${appDir.path}/$filename');
-      await imageFile.writeAsBytes(response.data);
-
-      // Show a confirmation dialog
+      await Dio().download(imageUrl, path);
+      await GallerySaver.saveImage(path, albumName: 'Pets App');
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -105,7 +96,7 @@ class ImageScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         ),
