@@ -21,10 +21,19 @@ class ApiConstance {
 
   static const String dogsImagesList = "$dogsBaseUrl/images/search?limit=10";
 
+  // static const String catsSimmilarImagesList = "$baseUrl/images/search?limit=10";
+  // static const String dogsSimmilarImagesList = "$dogsBaseUrl/images/search?limit=10";
+
   static const String catsFavEndPoin =
       "https://api.thecatapi.com/v1/favourites";
   static const String dogsFavEndPoin =
       "https://api.thedogapi.com/v1/favourites";
+
+  static String catsSimilarImagesEndPoint({required String petName}) =>
+      "$baseUrl/images/search?limit=10&breed_ids=$petName&api_key=$apiKey";
+
+  static String dogsSimilarImagesEndPoint({required String petName}) =>
+      "$dogsBaseUrl/images/search?limit=10&breed_ids=$petName&api_key=$dogsApiKey";
 
   static String deletCatItmeEndPoint({required int favItemId}) =>
       "https://api.thecatapi.com/v1/favourites/$favItemId";
