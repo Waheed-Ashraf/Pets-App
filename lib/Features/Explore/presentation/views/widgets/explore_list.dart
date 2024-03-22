@@ -49,7 +49,7 @@ class ExploreList extends StatelessWidget {
                         placeholder: (BuildContext context, String url) =>
                             SizedBox(
                           // color: Colors.white,
-                          height: state.exploreImagesList[index].height * .12,
+                          height: 100,
                           child: Center(
                             child: Hero(
                               tag: index.toString(),

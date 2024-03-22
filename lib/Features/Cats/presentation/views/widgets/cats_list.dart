@@ -8,6 +8,7 @@ import 'package:pets_app/Core/utils/app_styles.dart';
 import 'package:pets_app/Core/widgets/custom_error_widget.dart';
 import 'package:pets_app/Core/widgets/custom_loading_indicator.dart';
 import 'package:pets_app/Features/Cats/presentation/controller/CatsBreedsCubit/cats_breeds_cubit.dart';
+import 'package:pets_app/Features/Cats/presentation/controller/SimilarCatsImagesCubit/similar_cats_images_cubit.dart';
 import 'package:pets_app/Features/Cats/presentation/views/widgets/cats_details_view.dart';
 
 class CatsList extends StatelessWidget {
@@ -31,6 +32,9 @@ class CatsList extends StatelessWidget {
                     ? Container()
                     : GestureDetector(
                         onTap: () {
+                          BlocProvider.of<SimilarCatsImagesCubit>(context)
+                              .getCatsSimilarImages(
+                                  catName: state.catsBreedsList[index].id);
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                             return CatsDetailsView(

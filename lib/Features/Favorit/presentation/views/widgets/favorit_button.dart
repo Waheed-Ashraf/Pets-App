@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pets_app/Features/Cats/data/Models/CatsModels/cats_model.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/FavCubit/favorit_cubit.dart';
 
 class FavoritButton extends StatefulWidget {

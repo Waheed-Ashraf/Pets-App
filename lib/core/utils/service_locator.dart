@@ -4,6 +4,7 @@ import 'package:pets_app/Core/utils/api_service.dart';
 import 'package:pets_app/Features/Cats/data/CatsRepo/cats_repo.dart';
 import 'package:pets_app/Features/Cats/data/CatsRepo/cats_repo_imp.dart';
 import 'package:pets_app/Features/Cats/presentation/controller/CatsBreedsCubit/cats_breeds_cubit.dart';
+import 'package:pets_app/Features/Cats/presentation/controller/SimilarCatsImagesCubit/similar_cats_images_cubit.dart';
 import 'package:pets_app/Features/Dogs/data/DogsRepo/dogs_repo.dart';
 import 'package:pets_app/Features/Dogs/data/DogsRepo/dogs_repo_imp.dart';
 import 'package:pets_app/Features/Dogs/presentation/controller/DogsViewCubit/dogs_view_cubit.dart';
@@ -22,6 +23,8 @@ void serviceLocator() {
   getIt.registerFactory<DogsViewCubit>(() => DogsViewCubit(getIt()));
   getIt.registerFactory<ExploreCubit>(() => ExploreCubit(getIt()));
   getIt.registerFactory<FavoritCubit>(() => FavoritCubit(getIt()));
+  getIt.registerFactory<SimilarCatsImagesCubit>(
+      () => SimilarCatsImagesCubit(getIt()));
 
   //Repo
   getIt.registerLazySingleton<CatsRepo>(() => CatsRepoImp(getIt()));

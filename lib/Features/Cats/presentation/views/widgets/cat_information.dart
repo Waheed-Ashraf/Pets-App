@@ -1,10 +1,9 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pets_app/Core/widgets/grediant_button.dart';
 import 'package:pets_app/Features/Cats/data/Models/CatsModels/cats_model.dart';
 import 'package:pets_app/Features/Cats/presentation/views/widgets/cat_characteristics_list.dart';
-import 'package:pets_app/Features/Favorit/presentation/controller/FavCubit/favorit_cubit.dart';
+import 'package:pets_app/Features/Cats/presentation/views/widgets/similar_cats_Images_list.dart';
 import 'package:pets_app/Features/Favorit/presentation/views/widgets/favorit_button.dart';
 import 'package:pets_app/core/utils/app_styles.dart';
 import 'package:pets_app/core/utils/colors.dart';
@@ -19,10 +18,11 @@ class CatInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(favoritBreedsIds);
-    print(BlocProvider.of<FavoritCubit>(context).favoritItemsIds);
+    // print(favoritBreedsIds);
+    // print(BlocProvider.of<FavoritCubit>(context).favoritItemsIds);
 
     return FadeInUp(
+      duration: const Duration(seconds: 1),
       child: Column(
         children: [
           Row(
@@ -151,6 +151,7 @@ class CatInformation extends StatelessWidget {
                   style:
                       AppStyles.styleMedium16.copyWith(color: secondaryColor),
                 ),
+                const SimilarImagesList(),
                 const Divider(
                   color: primaryColor,
                   thickness: 2,

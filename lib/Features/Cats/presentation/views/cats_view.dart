@@ -9,8 +9,12 @@ class CatsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<CatsBreedsCubit>()..getCatsBreedsList(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<CatsBreedsCubit>()..getCatsBreedsList(),
+        ),
+      ],
       child: const Scaffold(
         body: CatsViewBody(),
       ),
