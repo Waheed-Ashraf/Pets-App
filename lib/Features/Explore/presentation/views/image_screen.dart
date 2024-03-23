@@ -18,7 +18,6 @@ class ImageScreen extends StatelessWidget {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: const Text('Image'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
