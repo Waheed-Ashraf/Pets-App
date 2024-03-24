@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pets_app/Features/Dogs/data/Models/DogsBreedsModels/dogs_breeds_model.dart';
 import 'package:pets_app/core/utils/app_styles.dart';
 import 'package:pets_app/core/utils/colors.dart';
-import 'package:pets_app/core/utils/functions/launch_url.dart';
-import 'package:pets_app/core/widgets/grediant_button.dart';
 
 class DogInformation extends StatelessWidget {
   const DogInformation({
@@ -260,29 +258,6 @@ class DogInformation extends StatelessWidget {
               ),
             ],
           ),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Read more on wikipedia:',
-              style: AppStyles.styleSemiBold18.copyWith(color: primaryColor),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GradientButton(
-                  text: 'Read More',
-                  onPressed: () {
-                    launchCustomUrl(context: context, url: dog.bredFor);
-                  },
-                ),
-              ],
-            ),
-          ],
         ),
       ],
     );

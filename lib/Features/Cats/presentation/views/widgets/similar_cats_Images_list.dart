@@ -1,16 +1,14 @@
+// ignore: file_names
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dio/dio.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:gallery_saver/gallery_saver.dart';
 import 'package:lottie/lottie.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:pets_app/Core/utils/app_styles.dart';
+
 import 'package:pets_app/Core/widgets/custom_error_widget.dart';
 import 'package:pets_app/Features/Cats/presentation/controller/SimilarCatsImagesCubit/similar_cats_images_cubit.dart';
-import 'package:pets_app/Features/Explore/data/ExploreModels/image_model.dart';
+import 'package:pets_app/Features/Cats/presentation/views/widgets/image_list_viewer.dart';
 
 class SimilarImagesList extends StatelessWidget {
   const SimilarImagesList({super.key});
@@ -34,7 +32,6 @@ class SimilarImagesList extends StatelessWidget {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return ImageListViewer(
                         firestImageToShow: index,
-                        // imageUrl: state.similarImagesList[index].url,
                         items: state.similarImagesList);
                   }));
                 },
@@ -73,103 +70,5 @@ class SimilarImagesList extends StatelessWidget {
         }
       },
     );
-  }
-}
-
-class ImageListViewer extends StatelessWidget {
-  final List<ImageModel> items;
-//  int indexx ;
-  final int firestImageToShow;
-
-  const ImageListViewer({
-    //  required this.indexx,
-    super.key,
-    required this.items,
-    required this.firestImageToShow,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await _downloadImage(context, items[firestImageToShow].url);
-        },
-        child: const Icon(Icons.download),
-      ),
-      body: CarouselSlider(
-        options: CarouselOptions(
-          initialPage: firestImageToShow,
-          height: MediaQuery.of(context).size.height,
-          viewportFraction: 1.0,
-          onPageChanged: (index, reason) {},
-        ),
-        items: items.map(
-          (item) {
-            return CachedNetworkImage(
-              imageUrl: item.url,
-              fit: BoxFit.contain,
-            );
-          },
-        ).toList(),
-      ),
-    );
-  }
-
-  Future<void> _downloadImage(BuildContext context, String imageUrl) async {
-    final tempDir = await getTemporaryDirectory();
-    final path = '${tempDir.path}/myfile.jpg';
-    try {
-      await Dio().download(imageUrl, path);
-      await GallerySaver.saveImage(path, albumName: 'Pets App');
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(
-            'Download Complete',
-            style: AppStyles.styleBold16,
-          ),
-          content: Text(
-            'The image has been saved to your device.',
-            style: AppStyles.styleBold16,
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
-    } catch (e) {
-      // Show an error dialog
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(
-            'Error',
-            style: AppStyles.styleBold16,
-          ),
-          content: Text(
-            'Failed to download the image.',
-            style: AppStyles.styleBold16,
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
-    }
   }
 }

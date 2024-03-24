@@ -6,6 +6,7 @@ import 'package:pets_app/Core/utils/api_service.dart';
 import 'package:pets_app/Features/Dogs/data/DogsRepo/dogs_repo.dart';
 import 'package:pets_app/Features/Dogs/data/Models/DogsBreedsModels/dogs_breeds_model.dart';
 import 'package:pets_app/Features/Dogs/data/Models/SearchByDogsBreedIdModels/search_by_breeds_model.dart';
+import 'package:pets_app/Features/Explore/data/ExploreModels/image_model.dart';
 
 class DogsRepoImp implements DogsRepo {
   final ApiService _apiService;
@@ -38,6 +39,26 @@ class DogsRepoImp implements DogsRepo {
       List<SearchDogsByBreedsIdModel> itemData = [];
       for (var element in data) {
         itemData.add(SearchDogsByBreedsIdModel.fromJson(element));
+      }
+      return right(itemData);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      } else {
+        return left(ServerFailure(e.toString()));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ImageModel>>> fetchSimilarDogsimagesList(
+      {required String dogName}) async {
+    try {
+      var data = await _apiService.get(
+          endPoint: ApiConstance.searchByDogBreedsId(dogName));
+      List<ImageModel> itemData = [];
+      for (var element in data) {
+        itemData.add(ImageModel.fromJson(element));
       }
       return right(itemData);
     } catch (e) {

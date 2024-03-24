@@ -76,26 +76,21 @@ class FavoritList extends StatelessWidget {
             ),
           );
         } else if (state is FavoritListEmpty) {
-          return Padding(
-            padding: EdgeInsets.only(
-                left: 30,
-                right: 30,
-                top: MediaQuery.sizeOf(context).height * 0.12),
-            child: Column(
-              children: [
-                Lottie.asset(
-                  'assets/images/search.json',
-                  width: MediaQuery.of(context).size.width * .7,
-                  fit: BoxFit.contain,
-                ),
-                Text(
-                  'There is no Favourite pictures, Try adding some',
-                  textAlign: TextAlign.center,
-                  style: AppStyles.styleBold16.copyWith(
-                      color: Theme.of(context).colorScheme.inversePrimary),
-                ),
-              ],
-            ),
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Lottie.asset(
+                'assets/images/search.json',
+                width: MediaQuery.of(context).size.width * .7,
+                fit: BoxFit.contain,
+              ),
+              Text(
+                'There is no Favourite pictures, Try adding some',
+                textAlign: TextAlign.center,
+                style: AppStyles.styleBold16.copyWith(
+                    color: Theme.of(context).colorScheme.inversePrimary),
+              ),
+            ],
           );
         } else if (state is FavoritError) {
           return CustomErrorWidget(errMessage: state.errorMessage);
