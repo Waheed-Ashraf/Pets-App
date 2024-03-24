@@ -79,9 +79,9 @@ class SimilarImagesList extends StatelessWidget {
 class ImageListViewer extends StatelessWidget {
   final List<ImageModel> items;
 //  int indexx ;
-  int firestImageToShow;
+  final int firestImageToShow;
 
-  ImageListViewer({
+  const ImageListViewer({
     //  required this.indexx,
     super.key,
     required this.items,

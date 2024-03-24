@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pets_app/Features/Profile/presentation/views/widgets/picking_image_list_tile.dart';
+import 'package:pets_app/Features/Profile/presentation/views/widgets/profile_image_full.dart';
 import 'package:pets_app/core/utils/colors.dart';
 import 'rounded_curve.dart';
 import 'package:image_picker/image_picker.dart';
@@ -326,14 +327,25 @@ class _ProfileImageState extends State<ProfileImage> {
           String? photoUrl = photoData['userimage'];
           print('pppppppppppppppppp:$photoUrl');
           return photoUrl != null
-              ? Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.sizeOf(context).width * 0.4,
-                  child: CircleAvatar(
-                    radius: 75,
-                    backgroundColor: secondaryColor,
-                    backgroundImage: NetworkImage(photoUrl),
-                  ))
+              ? GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProfileImageFull(
+                                imageUrl: photoUrl,
+                              )),
+                    );
+                  },
+                  child: Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.sizeOf(context).width * 0.4,
+                      child: CircleAvatar(
+                        radius: 75,
+                        backgroundColor: secondaryColor,
+                        backgroundImage: NetworkImage(photoUrl),
+                      )),
+                )
               : const CircleAvatar(
                   radius: 75,
                   backgroundColor: secondaryColor,

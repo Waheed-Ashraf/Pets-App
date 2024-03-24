@@ -77,9 +77,11 @@ class FavoritList extends StatelessWidget {
           );
         } else if (state is FavoritListEmpty) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
+            padding: EdgeInsets.only(
+                left: 30,
+                right: 30,
+                top: MediaQuery.sizeOf(context).height * 0.12),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Lottie.asset(
                   'assets/images/search.json',
@@ -87,7 +89,7 @@ class FavoritList extends StatelessWidget {
                   fit: BoxFit.contain,
                 ),
                 Text(
-                  'There is no Favorit pictures, Try add some',
+                  'There is no Favourite pictures, Try adding some',
                   textAlign: TextAlign.center,
                   style: AppStyles.styleBold16.copyWith(
                       color: Theme.of(context).colorScheme.inversePrimary),

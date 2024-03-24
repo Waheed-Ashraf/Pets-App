@@ -25,18 +25,22 @@ class CatInformation extends StatelessWidget {
       duration: const Duration(seconds: 1),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                cat.name,
-                style: AppStyles.styleSemiBold24.copyWith(color: primaryColor),
-              ),
-              FavoritButton(imageId: cat.image!.id),
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  cat.name,
+                  style:
+                      AppStyles.styleSemiBold24.copyWith(color: primaryColor),
+                ),
+                FavoritButton(imageId: cat.image!.id),
+              ],
+            ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -181,7 +185,7 @@ class CatInformation extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            height: 16,
+            height: 15,
           ),
           GradientButton(
             text: 'Read More',

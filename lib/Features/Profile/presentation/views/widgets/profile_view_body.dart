@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:pets_app/Core/utils/app_styles.dart';
 import 'package:pets_app/Features/AuthFeature/presentation/views/login_view/login_view.dart';
 import 'package:pets_app/core/widgets/custom_button.dart';
@@ -168,23 +169,18 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                           title: 'Edit profile information',
                         ),
                       ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      SizedBox(
-                        width: 150,
-                        child: CustomButton(
-                            text: 'Logout',
-                            onPressed: () async {
-                              await _signOut();
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const LoginView(),
-                                ),
-                              );
-                            }),
-                      )
+                      GestureDetector(
+                          onTap: () async {
+                            await _signOut();
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LoginView(),
+                              ),
+                            );
+                          },
+                          child: const CustomListTile(
+                              icon: Icons.logout, title: 'Logout'))
                     ],
                   ),
                 ),
