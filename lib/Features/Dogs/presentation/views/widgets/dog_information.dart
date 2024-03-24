@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pets_app/Features/Dogs/data/Models/DogsBreedsModels/dogs_breeds_model.dart';
+import 'package:pets_app/Features/Dogs/presentation/views/widgets/similar_dogs_images_list.dart';
 import 'package:pets_app/core/utils/app_styles.dart';
 import 'package:pets_app/core/utils/colors.dart';
 
@@ -256,6 +257,7 @@ class DogInformation extends StatelessWidget {
                   ),
                 ],
               ),
+              const SimilarDogsImagesList(),
             ],
           ),
         ),

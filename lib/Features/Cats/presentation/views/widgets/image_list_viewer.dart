@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
+import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pets_app/Core/utils/app_styles.dart';
 import 'package:pets_app/Features/Explore/data/ExploreModels/image_model.dart';
@@ -42,6 +43,17 @@ class ImageListViewer extends StatelessWidget {
             return CachedNetworkImage(
               imageUrl: item.url,
               fit: BoxFit.contain,
+              placeholder: (BuildContext context, String url) => SizedBox(
+                height: 200.0,
+                child: Center(
+                  child: Lottie.asset(
+                    'assets/images/image-placeholder.json',
+                    width: 40,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             );
           },
         ).toList(),

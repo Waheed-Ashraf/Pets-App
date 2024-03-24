@@ -55,7 +55,7 @@ class DogsRepoImp implements DogsRepo {
       {required String dogName}) async {
     try {
       var data = await _apiService.get(
-          endPoint: ApiConstance.searchByDogBreedsId(dogName));
+          endPoint: ApiConstance.dogsSimilarImagesEndPoint(petName: dogName));
       List<ImageModel> itemData = [];
       for (var element in data) {
         itemData.add(ImageModel.fromJson(element));

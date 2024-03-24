@@ -8,6 +8,7 @@ import 'package:pets_app/Core/utils/app_styles.dart';
 import 'package:pets_app/Core/widgets/custom_error_widget.dart';
 import 'package:pets_app/Core/widgets/custom_loading_indicator.dart';
 import 'package:pets_app/Features/Dogs/presentation/controller/DogsViewCubit/dogs_view_cubit.dart';
+import 'package:pets_app/Features/Dogs/presentation/controller/similarDogsImageList/similar_dogs_images_cubit.dart';
 import 'package:pets_app/Features/Dogs/presentation/views/widgets/dogs_details_view.dart';
 
 class DogsList extends StatelessWidget {
@@ -31,6 +32,10 @@ class DogsList extends StatelessWidget {
                   : FadeInUp(
                       child: GestureDetector(
                         onTap: () {
+                          BlocProvider.of<SimilarDogsImagesCubit>(context)
+                              .getDogsSimilarImages(
+                                  dogName: state.dogsBreedsList[index].id
+                                      .toString());
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                             return DogsDetailsView(

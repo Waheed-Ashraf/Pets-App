@@ -5,6 +5,7 @@ import 'package:pets_app/Core/theme/app_theme.dart';
 import 'package:pets_app/Core/utils/service_locator.dart';
 import 'package:pets_app/Features/BottomNavBar/bottom_nav_bar.dart';
 import 'package:pets_app/Features/Cats/presentation/controller/SimilarCatsImagesCubit/similar_cats_images_cubit.dart';
+import 'package:pets_app/Features/Dogs/presentation/controller/similarDogsImageList/similar_dogs_images_cubit.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/FavCubit/favorit_cubit.dart';
 import 'package:pets_app/firebase_options.dart';
 
@@ -30,6 +31,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<SimilarCatsImagesCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<SimilarDogsImagesCubit>(),
         ),
       ],
       child: MaterialApp(
