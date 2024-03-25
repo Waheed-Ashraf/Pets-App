@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pets_app/Features/Favorit/presentation/controller/FavCubit/favorit_cubit.dart';
+import 'package:pets_app/Features/Favorit/presentation/controller/FavCatCubit/favorit_cubit.dart';
 
-class FavoritButton extends StatefulWidget {
+class DogsFavoritButton extends StatefulWidget {
   final String imageId;
 
-  const FavoritButton({
+  const DogsFavoritButton({
     super.key,
     required this.imageId,
   });
 
   @override
-  State<FavoritButton> createState() => _FavoritButtonState();
+  State<DogsFavoritButton> createState() => _DogsFavoritButtonState();
 }
 
-class _FavoritButtonState extends State<FavoritButton> {
+class _DogsFavoritButtonState extends State<DogsFavoritButton> {
   Color color = Colors.grey;
 
   @override
@@ -38,8 +38,8 @@ class _FavoritButtonState extends State<FavoritButton> {
             setState(() {
               color = Colors.red;
             });
-            BlocProvider.of<FavoritCubit>(context)
-                .addItemToFavoritList(widget.imageId);
+            // BlocProvider.of<FavoritCubit>(context)
+            //     .addDogToFavoritList(widget.imageId);
           }
         },
       )),

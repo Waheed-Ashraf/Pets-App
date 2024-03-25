@@ -14,7 +14,7 @@ import 'package:pets_app/Features/Explore/data/ExploreRepo/explore_repo_imp.dart
 import 'package:pets_app/Features/Explore/presentation/controller/ExploreCubit/explore_cubit.dart';
 import 'package:pets_app/Features/Favorit/data/FavRepo/fav_repo.dart';
 import 'package:pets_app/Features/Favorit/data/FavRepo/fav_repo_imp.dart';
-import 'package:pets_app/Features/Favorit/presentation/controller/FavCubit/favorit_cubit.dart';
+import 'package:pets_app/Features/Favorit/presentation/controller/FavCatCubit/favorit_cubit.dart';
 
 GetIt getIt = GetIt.instance;
 

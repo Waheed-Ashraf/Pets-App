@@ -4,7 +4,7 @@ import 'package:pets_app/Core/widgets/grediant_button.dart';
 import 'package:pets_app/Features/Cats/data/Models/CatsModels/cats_model.dart';
 import 'package:pets_app/Features/Cats/presentation/views/widgets/cat_characteristics_list.dart';
 import 'package:pets_app/Features/Cats/presentation/views/widgets/similar_cats_Images_list.dart';
-import 'package:pets_app/Features/Favorit/presentation/views/widgets/favorit_button.dart';
+import 'package:pets_app/Features/Favorit/presentation/views/widgets/cats_favorit_button.dart';
 import 'package:pets_app/core/utils/app_styles.dart';
 import 'package:pets_app/core/utils/colors.dart';
 import 'package:pets_app/core/utils/functions/launch_url.dart';
@@ -35,7 +35,7 @@ class CatInformation extends StatelessWidget {
                   style:
                       AppStyles.styleSemiBold24.copyWith(color: primaryColor),
                 ),
-                FavoritButton(imageId: cat.image!.id),
+                CatsFavoritButton(imageId: cat.image!.id),
               ],
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pets_app/Features/Dogs/data/Models/DogsBreedsModels/dogs_breeds_model.dart';
 import 'package:pets_app/Features/Dogs/presentation/views/widgets/similar_dogs_images_list.dart';
+import 'package:pets_app/Features/Favorit/presentation/views/widgets/dogs_favorit_button.dart';
 import 'package:pets_app/core/utils/app_styles.dart';
 import 'package:pets_app/core/utils/colors.dart';
 
@@ -28,13 +29,7 @@ class DogInformation extends StatelessWidget {
                 style: AppStyles.styleSemiBold24.copyWith(color: primaryColor),
               ),
             ),
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.favorite,
-                  color: Colors.red,
-                  size: 25,
-                ))
+            DogsFavoritButton(imageId: dog.image!.id),
           ],
         ),
         Padding(
