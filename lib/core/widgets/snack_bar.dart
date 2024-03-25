@@ -6,7 +6,7 @@ void showSnackBar(context, {required Color color, required String message}) {
     SnackBar(
       behavior: SnackBarBehavior.floating,
       duration: const Duration(milliseconds: 500),
-      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25))),
       content: Center(

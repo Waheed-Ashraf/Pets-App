@@ -36,30 +36,10 @@ class FavoritCubit extends Cubit<FavoritState> {
   Future deletCatFromFavoritList(int favItemId) async {
     favoritItemsIds.remove(favItemId);
     await _favRepo.deleteFromFavoritList(favItemId: favItemId);
-    if (favoritBreedsIds.isEmpty) {
+    if (favoritCatsIds.isEmpty) {
       emit(const FavoritCatsListEmpty());
     }
   }
-  // Future addDogToFavoritList(String breedsId) async {
-  //   var data = await _favRepo.addDogToFavoritList(breedsId: breedsId);
-
-  //   data.fold((l) => emit(FavoritError(l.errMessage)), (r) {
-  //     favoritItemsIds.add(r);
-  //     favoritDogsIds.add(breedsId);
-
-  //     favoritBreedsIds.add(breedsId);
-
-  //     emit(const FavoritItemAdded());
-  //   });
-  // }
-
-  // Future deletDogFromFavoritList(int favItemId) async {
-  //   favoritItemsIds.remove(favItemId);
-  //   await _favRepo.deleteFromFavoritList(favItemId: favItemId);
-  //   if (favoritBreedsIds.isEmpty) {
-  //     emit(const FavoritListEmpty());
-  //   }
-  // }
 }
 
 Set<String> favoritBreedsIds = {};

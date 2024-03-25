@@ -7,6 +7,7 @@ import 'package:lottie/lottie.dart';
 import 'package:pets_app/Core/utils/app_styles.dart';
 import 'package:pets_app/Core/widgets/custom_error_widget.dart';
 import 'package:pets_app/Core/widgets/snack_bar.dart';
+import 'package:pets_app/Features/Explore/presentation/views/image_screen.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/AllFavoritCubit/all_favorit_cubit.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/FavCatCubit/favorit_cubit.dart';
 
@@ -21,50 +22,61 @@ class FavoritCatsList extends StatelessWidget {
       builder: (context, state) {
         if (state is FavoritCatsListLoaded) {
           return FadeInUp(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
                     'Favorit Cats :',
                     style: AppStyles.styleBold16,
                   ),
-                  MasonryGridView.builder(
-                    shrinkWrap: true,
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: state.favList.length,
-                    gridDelegate:
-                        SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: crossAxisCount),
-                    itemBuilder: (BuildContext context, int index) {
-                      return Dismissible(
-                        key: Key(state.favList[index].id.toString()),
-                        background: const Center(
-                          child: Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                          ),
+                ),
+                MasonryGridView.builder(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: state.favList.length,
+                  gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: crossAxisCount),
+                  itemBuilder: (BuildContext context, int index) {
+                    return Dismissible(
+                      key: Key(state.favList[index].id.toString()),
+                      background: const Center(
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.red,
                         ),
-                        onDismissed: (direction) {
-                          favoritBreedsIds
-                              .remove(state.favList[index].image!.id);
-                          favoritCatsIds.remove(state.favList[index].image!.id);
+                      ),
+                      onDismissed: (direction) {
+                        favoritBreedsIds.remove(state.favList[index].image!.id);
+                        favoritCatsIds.remove(state.favList[index].image!.id);
 
-                          showSnackBar(context,
-                              color: Colors.red, message: 'Pet deleted');
-                          BlocProvider.of<FavoritCubit>(context)
-                              .deletCatFromFavoritList(state.favList[index].id);
-                          BlocProvider.of<AllFavoritCubit>(context)
-                              .checkIfFavoritListEmpty();
-                        },
-                        child: Card(
-                          elevation: 6,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
+                        showSnackBar(context,
+                            color: Colors.red, message: 'Cat deleted');
+                        BlocProvider.of<FavoritCubit>(context)
+                            .deletCatFromFavoritList(state.favList[index].id);
+                        BlocProvider.of<AllFavoritCubit>(context)
+                            .checkIfFavoritListEmpty();
+                      },
+                      child: Card(
+                        elevation: 6,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ImageScreen(
+                                      imageUrl: state.favList[index].image!.url,
+                                      heroTag: index.toString()),
+                                ),
+                              );
+                            },
                             child: CachedNetworkImage(
                               imageUrl: state.favList[index].image!.url,
                               fit: BoxFit.cover,
@@ -85,13 +97,15 @@ class FavoritCatsList extends StatelessWidget {
                             ),
                           ),
                         ),
-                      );
-                    },
-                  ),
-                ],
-              ),
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
           );
+        } else if (state is FavoritCatsListEmpty) {
+          return const SizedBox();
         } else if (state is FavoritCatsError) {
           return CustomErrorWidget(errMessage: state.errorMessage);
         } else {

@@ -37,7 +37,7 @@ class FavoritDogsCubit extends Cubit<FavoritDogsState> {
   Future deleteDogFromFavoritList(int favItemId) async {
     favoritItemsIds.remove(favItemId);
     await _favRepo.deleteDogFromFavoritList(favItemId: favItemId);
-    if (favoritBreedsIds.isEmpty) {
+    if (favoritDogsIds.isEmpty) {
       emit(const FavoritDogsListEmpty());
     }
   }

@@ -7,6 +7,7 @@ import 'package:lottie/lottie.dart';
 import 'package:pets_app/Core/utils/app_styles.dart';
 import 'package:pets_app/Core/widgets/custom_error_widget.dart';
 import 'package:pets_app/Core/widgets/snack_bar.dart';
+import 'package:pets_app/Features/Explore/presentation/views/image_screen.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/AllFavoritCubit/all_favorit_cubit.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/FavCatCubit/favorit_cubit.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/FavDogCubit/favorit_dogs_cubit.dart';
@@ -23,12 +24,17 @@ class FavoritDogsList extends StatelessWidget {
         if (state is FavoritDogsListLoaded) {
           return FadeInUp(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Favorit Dogs :',
-                  style: AppStyles.styleBold16,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Favorit Dogs :',
+                    style: AppStyles.styleBold16,
+                  ),
                 ),
                 MasonryGridView.builder(
+                  padding: EdgeInsets.zero,
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
                   itemCount: state.favList.length,
@@ -61,23 +67,35 @@ class FavoritDogsList extends StatelessWidget {
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(16),
-                          child: CachedNetworkImage(
-                            imageUrl: state.favList[index].image!.url,
-                            fit: BoxFit.cover,
-                            placeholder: (BuildContext context, String url) =>
-                                SizedBox(
-                              // color: Colors.white,
-                              height: 100,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ImageScreen(
+                                      imageUrl: state.favList[index].image!.url,
+                                      heroTag: index.toString()),
+                                ),
+                              );
+                            },
+                            child: CachedNetworkImage(
+                              imageUrl: state.favList[index].image!.url,
+                              fit: BoxFit.cover,
+                              placeholder: (BuildContext context, String url) =>
+                                  SizedBox(
+                                // color: Colors.white,
+                                height: 100,
 
-                              child: Center(
-                                child: Lottie.asset(
-                                    'assets/images/image-placeholder.json',
-                                    width: 40,
-                                    fit: BoxFit.contain),
+                                child: Center(
+                                  child: Lottie.asset(
+                                      'assets/images/image-placeholder.json',
+                                      width: 40,
+                                      fit: BoxFit.contain),
+                                ),
                               ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
                             ),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
                           ),
                         ),
                       ),

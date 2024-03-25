@@ -33,7 +33,7 @@ class _CatsFavoritButtonState extends State<CatsFavoritButton> {
               (favoritBreedsIds.contains(widget.imageId)) ? Colors.red : color,
         ),
         onPressed: () {
-          if (favoritCatsIds.contains(widget.imageId)) {
+          if (favoritBreedsIds.contains(widget.imageId)) {
           } else {
             setState(() {
               color = Colors.red;
