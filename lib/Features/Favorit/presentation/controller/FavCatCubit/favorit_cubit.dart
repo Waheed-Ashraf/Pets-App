@@ -8,7 +8,6 @@ part 'favorit_state.dart';
 class FavoritCubit extends Cubit<FavoritState> {
   final FavRepo _favRepo;
   FavoritCubit(this._favRepo) : super(FavoritInitial());
-  Set<int> favoritItemsIds = {};
 
   Future fetchCatsFavoritList() async {
     emit(FavoritCatsListLoading());
@@ -66,3 +65,5 @@ class FavoritCubit extends Cubit<FavoritState> {
 Set<String> favoritBreedsIds = {};
 Set<String> favoritCatsIds = {};
 Set<String> favoritDogsIds = {};
+
+Set<int> favoritItemsIds = {};

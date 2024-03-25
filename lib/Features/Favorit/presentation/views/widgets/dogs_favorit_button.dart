@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/FavCatCubit/favorit_cubit.dart';
+import 'package:pets_app/Features/Favorit/presentation/controller/FavDogCubit/favorit_dogs_cubit.dart';
 
 class DogsFavoritButton extends StatefulWidget {
   final String imageId;
@@ -38,8 +39,8 @@ class _DogsFavoritButtonState extends State<DogsFavoritButton> {
             setState(() {
               color = Colors.red;
             });
-            // BlocProvider.of<FavoritCubit>(context)
-            //     .addDogToFavoritList(widget.imageId);
+            BlocProvider.of<FavoritDogsCubit>(context)
+                .addDogToFavoritList(widget.imageId);
           }
         },
       )),

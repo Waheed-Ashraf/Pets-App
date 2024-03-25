@@ -36,5 +36,5 @@ class ApiConstance {
       "https://api.thecatapi.com/v1/favourites/$favItemId";
 
   static String deletDogItmeEndPoint({required int favItemId}) =>
-      "https://api.thecatapi.com/v1/favourites/$favItemId";
+      "https://api.thedogapi.com/v1/favourites/$favItemId";
 }

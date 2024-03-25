@@ -4,7 +4,8 @@ import 'package:lottie/lottie.dart';
 import 'package:pets_app/Core/utils/app_styles.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/AllFavoritCubit/all_favorit_cubit.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/FavCatCubit/favorit_cubit.dart';
-import 'package:pets_app/Features/Favorit/presentation/views/widgets/favorit_list.dart';
+import 'package:pets_app/Features/Favorit/presentation/controller/FavDogCubit/favorit_dogs_cubit.dart';
+import 'package:pets_app/Features/Favorit/presentation/views/widgets/dogs_favorit_list.dart';
 
 class FavoritView extends StatefulWidget {
   const FavoritView({super.key});
@@ -16,7 +17,9 @@ class FavoritView extends StatefulWidget {
 class _FavoritViewState extends State<FavoritView> {
   @override
   void initState() {
-    BlocProvider.of<FavoritCubit>(context).fetchCatsFavoritList();
+    // BlocProvider.of<FavoritCubit>(context).fetchCatsFavoritList();
+    BlocProvider.of<FavoritDogsCubit>(context).fetchDogsFavoritList();
+
     super.initState();
   }
 
@@ -38,7 +41,7 @@ class _FavoritViewState extends State<FavoritView> {
                     fit: BoxFit.contain,
                   ),
                   Text(
-                    'There is no Favourite pictures, Try adding some',
+                    'There is no Favorite pictures, Try adding some',
                     textAlign: TextAlign.center,
                     style: AppStyles.styleBold16.copyWith(
                         color: Theme.of(context).colorScheme.inversePrimary),
@@ -49,8 +52,8 @@ class _FavoritViewState extends State<FavoritView> {
           } else {
             return const Column(
               children: [
-                FavoritList(),
-                // FavoritDogsList(),
+                //  FavoritCatsList(),
+                FavoritDogsList(),
               ],
             );
           }

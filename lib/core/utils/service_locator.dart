@@ -15,6 +15,7 @@ import 'package:pets_app/Features/Explore/presentation/controller/ExploreCubit/e
 import 'package:pets_app/Features/Favorit/data/FavRepo/fav_repo.dart';
 import 'package:pets_app/Features/Favorit/data/FavRepo/fav_repo_imp.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/FavCatCubit/favorit_cubit.dart';
+import 'package:pets_app/Features/Favorit/presentation/controller/FavDogCubit/favorit_dogs_cubit.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -24,6 +25,8 @@ void serviceLocator() {
   getIt.registerFactory<DogsViewCubit>(() => DogsViewCubit(getIt()));
   getIt.registerFactory<ExploreCubit>(() => ExploreCubit(getIt()));
   getIt.registerFactory<FavoritCubit>(() => FavoritCubit(getIt()));
+  getIt.registerFactory<FavoritDogsCubit>(() => FavoritDogsCubit(getIt()));
+
   getIt.registerFactory<SimilarCatsImagesCubit>(
       () => SimilarCatsImagesCubit(getIt()));
   getIt.registerFactory<SimilarDogsImagesCubit>(
