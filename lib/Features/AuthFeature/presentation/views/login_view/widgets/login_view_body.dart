@@ -16,22 +16,14 @@ class LoginViewBody extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Column(
-              children: [
-                SizedBox(
-                  height: 150,
-                  child: Center(
-                    child: Image.asset(
-                      AssetsData.launchingScreenImg,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
+            SizedBox(
+              height: 150,
+              child: Center(
+                child: Image.asset(
+                  AssetsData.launchingScreenImg,
+                  fit: BoxFit.contain,
                 ),
-                Text(
-                  'Loly Pets',
-                  style: AppStyles.styleSemiBold24,
-                ),
-              ],
+              ),
             ),
             SizedBox(
               height: MediaQuery.sizeOf(context).height * 0.1,

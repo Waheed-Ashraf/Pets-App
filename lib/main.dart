@@ -8,6 +8,7 @@ import 'package:pets_app/Features/Cats/presentation/controller/SimilarCatsImages
 import 'package:pets_app/Features/Dogs/presentation/controller/similarDogsImageList/similar_dogs_images_cubit.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/FavCatCubit/favorit_cubit.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/FavDogCubit/favorit_dogs_cubit.dart';
+import 'package:pets_app/Features/splash/presentation/View/splash_view.dart';
 import 'package:pets_app/firebase_options.dart';
 
 void main() async {
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
         // locale: DevicePreview.locale(context),
         // builder: DevicePreview.appBuilder,
         theme: lightMood,
-        home: const BottomBarScreen(),
+        home: const SplashView(),
       ),
     );
   }

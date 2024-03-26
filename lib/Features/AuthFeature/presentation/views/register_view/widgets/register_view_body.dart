@@ -15,20 +15,12 @@ class RegisterViewBody extends StatelessWidget {
         child: Column(
           children: [
             Center(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 150,
-                    child: Image.asset(
-                      AssetsData.launchingScreenImg,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  Text(
-                    'Loly Pets',
-                    style: AppStyles.styleSemiBold24,
-                  ),
-                ],
+              child: SizedBox(
+                height: 150,
+                child: Image.asset(
+                  AssetsData.launchingScreenImg,
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
             RegisterForm(),
