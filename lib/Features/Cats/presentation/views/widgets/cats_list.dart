@@ -10,6 +10,7 @@ import 'package:pets_app/Core/widgets/custom_loading_indicator.dart';
 import 'package:pets_app/Features/Cats/presentation/controller/CatsBreedsCubit/cats_breeds_cubit.dart';
 import 'package:pets_app/Features/Cats/presentation/controller/SimilarCatsImagesCubit/similar_cats_images_cubit.dart';
 import 'package:pets_app/Features/Cats/presentation/views/widgets/cats_details_view.dart';
+import 'package:pets_app/Features/Explore/presentation/views/image_screen.dart';
 
 class CatsList extends StatelessWidget {
   const CatsList({super.key});
@@ -90,22 +91,34 @@ class CatsList extends StatelessWidget {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
-                    child: CachedNetworkImage(
-                      imageUrl: state.searchCatBreed[index].url,
-                      fit: BoxFit.cover,
-                      placeholder: (BuildContext context, String url) =>
-                          SizedBox(
-                        // color: Colors.white,
-                        height: state.searchCatBreed[index].height * .12,
-                        child: Center(
-                          child: Lottie.asset(
-                              'assets/images/image-placeholder.json',
-                              width: 40,
-                              fit: BoxFit.contain),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ImageScreen(
+                                imageUrl: state.searchCatBreed[index].url,
+                                heroTag: index.toString()),
+                          ),
+                        );
+                      },
+                      child: CachedNetworkImage(
+                        imageUrl: state.searchCatBreed[index].url,
+                        fit: BoxFit.cover,
+                        placeholder: (BuildContext context, String url) =>
+                            SizedBox(
+                          // color: Colors.white,
+                          height: state.searchCatBreed[index].height * .12,
+                          child: Center(
+                            child: Lottie.asset(
+                                'assets/images/image-placeholder.json',
+                                width: 40,
+                                fit: BoxFit.contain),
+                          ),
                         ),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
                       ),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
                     ),
                   ),
                 );

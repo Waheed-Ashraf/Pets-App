@@ -11,7 +11,6 @@ import 'package:pets_app/Features/Explore/data/ExploreModels/image_model.dart';
 class ImageListViewer extends StatelessWidget {
   final List<ImageModel> items;
   final int firestImageToShow;
-
   const ImageListViewer({
     super.key,
     required this.items,
@@ -20,6 +19,8 @@ class ImageListViewer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int urlIndex = 0;
+
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -27,7 +28,7 @@ class ImageListViewer extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await _downloadImage(context, items[firestImageToShow].url);
+          await _downloadImage(context, items[urlIndex].url);
         },
         child: const Icon(Icons.download),
       ),
@@ -36,7 +37,9 @@ class ImageListViewer extends StatelessWidget {
           initialPage: firestImageToShow,
           height: MediaQuery.of(context).size.height,
           viewportFraction: 1.0,
-          onPageChanged: (index, reason) {},
+          onPageChanged: (index, reason) {
+            index = urlIndex;
+          },
         ),
         items: items.map(
           (item) {

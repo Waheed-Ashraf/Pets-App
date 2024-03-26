@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:lottie/lottie.dart';
+import 'package:pets_app/Core/shared/shared_ids.dart';
 import 'package:pets_app/Core/utils/app_styles.dart';
 import 'package:pets_app/Core/widgets/custom_error_widget.dart';
 import 'package:pets_app/Core/widgets/snack_bar.dart';
 import 'package:pets_app/Features/Explore/presentation/views/image_screen.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/AllFavoritCubit/all_favorit_cubit.dart';
-import 'package:pets_app/Features/Favorit/presentation/controller/FavCatCubit/favorit_cubit.dart';
 import 'package:pets_app/Features/Favorit/presentation/controller/FavDogCubit/favorit_dogs_cubit.dart';
 
 class FavoritDogsList extends StatelessWidget {
@@ -51,8 +51,8 @@ class FavoritDogsList extends StatelessWidget {
                       ),
                       onDismissed: (direction) {
                         favoritBreedsIds.remove(state.favList[index].image!.id);
-                        favoritDogsIds.remove(state.favList[index].image!.id);
 
+                        favoritDogsIds.remove(state.favList[index].image!.id);
                         showSnackBar(context,
                             color: Colors.red, message: 'Dog deleted');
                         BlocProvider.of<FavoritDogsCubit>(context)

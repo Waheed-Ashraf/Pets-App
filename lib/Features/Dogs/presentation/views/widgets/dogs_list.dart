@@ -10,6 +10,7 @@ import 'package:pets_app/Core/widgets/custom_loading_indicator.dart';
 import 'package:pets_app/Features/Dogs/presentation/controller/DogsViewCubit/dogs_view_cubit.dart';
 import 'package:pets_app/Features/Dogs/presentation/controller/similarDogsImageList/similar_dogs_images_cubit.dart';
 import 'package:pets_app/Features/Dogs/presentation/views/widgets/dogs_details_view.dart';
+import 'package:pets_app/Features/Explore/presentation/views/image_screen.dart';
 
 class DogsList extends StatelessWidget {
   const DogsList({super.key});
@@ -92,23 +93,37 @@ class DogsList extends StatelessWidget {
                       borderRadius: BorderRadius.circular(16),
                       child: state.searchDogBreed[index].url == ''
                           ? Container()
-                          : CachedNetworkImage(
-                              imageUrl: state.searchDogBreed[index].url,
-                              fit: BoxFit.cover,
-                              placeholder: (BuildContext context, String url) =>
-                                  SizedBox(
-                                // color: Colors.white,
-                                height:
-                                    state.searchDogBreed[index].height * .12,
-                                child: Center(
-                                  child: Lottie.asset(
-                                      'assets/images/image-placeholder.json',
-                                      width: 40,
-                                      fit: BoxFit.contain),
+                          : InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ImageScreen(
+                                        imageUrl:
+                                            state.searchDogBreed[index].url,
+                                        heroTag: index.toString()),
+                                  ),
+                                );
+                              },
+                              child: CachedNetworkImage(
+                                imageUrl: state.searchDogBreed[index].url,
+                                fit: BoxFit.cover,
+                                placeholder:
+                                    (BuildContext context, String url) =>
+                                        SizedBox(
+                                  // color: Colors.white,
+                                  height:
+                                      state.searchDogBreed[index].height * .12,
+                                  child: Center(
+                                    child: Lottie.asset(
+                                        'assets/images/image-placeholder.json',
+                                        width: 40,
+                                        fit: BoxFit.contain),
+                                  ),
                                 ),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
                               ),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
                             ),
                     )),
               );

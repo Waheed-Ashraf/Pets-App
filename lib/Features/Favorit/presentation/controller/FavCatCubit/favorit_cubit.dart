@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pets_app/Core/shared/shared_ids.dart';
 import 'package:pets_app/Features/Favorit/data/FavRepo/fav_repo.dart';
 import 'package:pets_app/Features/Favorit/data/Models/favorit_models.dart';
 
@@ -26,15 +27,17 @@ class FavoritCubit extends Cubit<FavoritState> {
 
     data.fold((l) => emit(FavoritCatsError(l.errMessage)), (r) {
       favoritItemsIds.add(r);
-      favoritBreedsIds.add(breedsId);
-      favoritCatsIds.add(breedsId);
 
+      favoritBreedsIds.add(breedsId);
+
+      favoritCatsIds.add(breedsId);
       emit(const FavoritCatAdded());
     });
   }
 
   Future deletCatFromFavoritList(int favItemId) async {
     favoritItemsIds.remove(favItemId);
+
     await _favRepo.deleteFromFavoritList(favItemId: favItemId);
     if (favoritCatsIds.isEmpty) {
       emit(const FavoritCatsListEmpty());
@@ -42,8 +45,8 @@ class FavoritCubit extends Cubit<FavoritState> {
   }
 }
 
-Set<String> favoritBreedsIds = {};
-Set<String> favoritCatsIds = {};
-Set<String> favoritDogsIds = {};
+// Set<String> favoritBreedsIds = {};
+// Set<String> favoritCatsIds = {};
+// Set<String> favoritDogsIds = {};
 
-Set<int> favoritItemsIds = {};
+// Set<int> favoritItemsIds = {};
