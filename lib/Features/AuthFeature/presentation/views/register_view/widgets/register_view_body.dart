@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pets_app/Core/utils/app_styles.dart';
 import 'package:pets_app/Core/utils/assets_data.dart';
 import 'package:pets_app/Features/AuthFeature/presentation/views/register_view/widgets/already_have_account_widget.dart';
 import 'package:pets_app/Features/AuthFeature/presentation/views/register_view/widgets/register_form.dart';
