@@ -137,4 +137,5 @@ You can download the APK file for the Slash App from the following link:
 For any questions or suggestions, feel free to contact me:
 
 Email: washraf124@gmail.com
+
 LinkedIn: [Waheed Ashraf](https://www.linkedin.com/in/waheed-ashraf-18a197214/)
